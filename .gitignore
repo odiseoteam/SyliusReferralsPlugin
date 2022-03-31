@@ -1,13 +1,17 @@
+.idea
+.DS_Store
+
 /vendor/
 /node_modules/
 /composer.lock
+/.php_cs.cache
+/.phpunit.result.cache
 
 /etc/build/*
 !/etc/build/.gitignore
 
 /tests/Application/yarn.lock
 
-/.phpunit.result.cache
 /behat.yml
 /phpspec.yml
 /phpunit.xml
