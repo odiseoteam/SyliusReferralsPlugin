@@ -1,0 +1,16 @@
+{#
+ This file is part of the Odiseo Referrals Plugin package, a commercial software.
+ Only users who have purchased a valid license and accept to the terms of the License Agreement can install
+ and use this program.
+ Copyright (c) 2018-2022 - Pablo D'amico
+#}
+
+<button
+    class="ui secondary icon labeled button"
+    type="button"
+    data-share-link-btn
+    data-href="{{ path('odiseo_sylius_referrals_plugin_shop_product_referrals_program', { product: product.id }) }}"
+    data-csrf="{{ csrf_token('affiliate_program_' ~ product.slug) }}">
+        <i class="alternate share icon"></i>
+        {{ 'odiseo_sylius_referrals_plugin.ui.share_link'|trans }}
+</button>

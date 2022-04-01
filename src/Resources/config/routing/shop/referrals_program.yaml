@@ -1,0 +1,5 @@
+odiseo_sylius_referrals_plugin_shop_product_referrals_program:
+    path: /product/referrals-program/create
+    methods: [POST]
+    defaults:
+        _controller: odiseo_sylius_referrals_plugin.controller.referrals_program:createFromProduct

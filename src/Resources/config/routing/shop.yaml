@@ -3,5 +3,5 @@
 # and use this program.
 # Copyright (c) 2018-2022 - Pablo D'amico
 
-imports:
-    - { resource: sylius_ui.yml }
+odiseo_sylius_referrals_plugin_shop_referrals_program:
+    resource: shop/referrals_program.yaml

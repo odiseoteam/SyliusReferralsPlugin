@@ -3,5 +3,10 @@
 # and use this program.
 # Copyright (c) 2018-2022 - Pablo D'amico
 
-imports:
-    - { resource: sylius_ui.yml }
+sylius_ui:
+    events:
+        sylius.shop.product.show.right_sidebar:
+            blocks:
+                affiliate_program:
+                    template: '@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/create.html.twig'
+                    priority: 3
