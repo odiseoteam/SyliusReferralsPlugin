@@ -51,6 +51,7 @@ class ReferralsProgramController extends ResourceController
     */
     public function createFromProduct(Request $request): Response
     {
+        dd($request);
         $product = $this->getProductRepository()->find($request->query->getInt('product'));
         Assert::notNull($product);
 

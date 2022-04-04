@@ -10,3 +10,9 @@ sylius_ui:
                 affiliate_program:
                     template: '@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/create.html.twig'
                     priority: 3
+        
+        sylius.shop.layout.javascripts:
+            blocks:
+                scripts:
+                    template: '@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/Product/Index/_scripts.html.twig'
+                    priority: 5

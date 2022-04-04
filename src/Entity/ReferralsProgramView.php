@@ -30,7 +30,7 @@ class ReferralsProgramView implements ReferralsProgramViewInterface
     private $referralsProgram;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Customer\Customer", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", cascade={"persist", "remove"})
      * 
      * @var CustomerInterface|null
      */
