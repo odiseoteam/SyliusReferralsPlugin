@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\AffiliateProgram;
+namespace Odiseo\SyliusReferralsPlugin\Controller;
 
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
@@ -51,10 +51,9 @@ class ReferralsProgramController extends ResourceController
     */
     public function createFromProduct(Request $request): Response
     {
-        dd($request);
         $product = $this->getProductRepository()->find($request->query->getInt('product'));
         Assert::notNull($product);
-
+        
         $customer = $this->getUser()->getCustomer();
         Assert::notNull($customer);
 
@@ -68,7 +67,10 @@ class ReferralsProgramController extends ResourceController
         $em->persist($referralsProgram);
         $em->flush();
 
-        return $this->json(['link' => $referralsProgram->getLink()]);
+        return $this->json([
+            'link' => $referralsProgram->getLink(), 
+            'responseURL' => $request->getUri(),
+        ]);
     }
 
     private function getProductRepository(): ProductRepository

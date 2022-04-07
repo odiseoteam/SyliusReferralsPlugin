@@ -7,7 +7,7 @@ sylius_ui:
     events:
         sylius.shop.product.show.right_sidebar:
             blocks:
-                affiliate_program:
+                referrals_program:
                     template: '@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/create.html.twig'
                     priority: 3
         
@@ -15,4 +15,3 @@ sylius_ui:
             blocks:
                 scripts:
                     template: '@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/Product/Index/_scripts.html.twig'
-                    priority: 5

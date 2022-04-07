@@ -1,0 +1,5 @@
+services:
+    odiseo_sylius_referrals_plugin.listener.shop.menu_builder:
+        class: Odiseo\SyliusReferralsPlugin\EventListener\AccountMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }

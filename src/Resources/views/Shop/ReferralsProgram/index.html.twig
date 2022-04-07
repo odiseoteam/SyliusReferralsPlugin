@@ -1,0 +1,47 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{#
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+#}
+{% set event_prefix = metadata.applicationName ~ '.shop.' ~ metadata.name ~ '.index' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <div class="pt-breadcrumb">
+        <div class="container-fluid">
+            <ul>
+                <li><a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a></li>
+                <li><a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a></li>
+                <li><div class="active section">{{ header|trans }}</div></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resources': resources}) }}
+
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="pt-title-page p-0">{{ header|trans }}</h1>
+            <p class="mt-0 sub header">{{ configuration.vars.subheader|default('')|trans }}</p>
+        </div>
+        <div class="col text-right">
+            {#<a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', { 'slug': 'become-affiliate' }) }}" class="btn btn-primary">{{ 'app.ui.become_an_affiliate'|trans }}</a>#}
+        </div>
+    </div>
+{#
+    {{ sylius_template_event([event_prefix ~ '.header', 'sylius.shop.index.header'], _context) }}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resources': resources}) }}
+
+    {{ sylius_template_event(event_prefix ~ '.before_content', {'resources': resources}) }}
+
+    {{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resources': resources}) }}
+#}
+{% endblock %}

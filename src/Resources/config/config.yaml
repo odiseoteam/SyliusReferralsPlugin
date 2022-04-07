@@ -5,3 +5,4 @@
 
 imports:
     - { resource: sylius_ui.yml }
+    - { resource: resources/referrals_program.yaml }

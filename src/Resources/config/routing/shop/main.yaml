@@ -3,5 +3,10 @@
 # and use this program.
 # Copyright (c) 2018-2022 - Pablo D'amico
 
-odiseo_sylius_referrals_plugin_shop_referrals_program:
-    resource: shop/referrals_program.yaml
+odiseo_sylius_referrals_plugin_partial:
+    resource: "./partial.yaml"
+    prefix: /_partial
+
+odiseo_sylius_referrals_plugin_menu:
+    resource: "./menu.yaml"
+    
