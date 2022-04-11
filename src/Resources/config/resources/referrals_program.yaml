@@ -20,3 +20,9 @@ sylius_resource:
                 model: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramView
                 interface: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramViewInterface
                 repository: Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository
+
+        odiseo_sylius_referrals_plugin.customer_payment:
+            classes:
+                model: Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment
+                interface: Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface
+                repository: Odiseo\SyliusReferralsPlugin\Repository\CustomerPaymentRepository

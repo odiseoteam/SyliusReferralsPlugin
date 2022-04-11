@@ -1,0 +1,35 @@
+# This file is part of the Odiseo Referrals Plugin package, a commercial software.
+# Only users who have purchased a valid license and accept to the terms of the License Agreement can install
+# and use this program.
+# Copyright (c) 2018-2022 Odiseo - Pablo D'amico
+
+winzou_state_machine:
+    odiseo_sylius_referrals_plugin_customer_payment:
+        class: "%odiseo_sylius_referrals_plugin.model.customer_payment.class%"
+        property_path: state
+        graph: odiseo_sylius_referrals_plugin_customer_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            on_hold: ~
+            new: ~
+            processing: ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+            refunded: ~
+        transitions:
+            create:
+                from: [on_hold]
+                to: new
+            process:
+                from: [new]
+                to: processing
+            complete:
+                from: [new, processing]
+                to: completed
+            cancel:
+                from: [new, processing]
+                to: cancelled
+            refund:
+                from: [completed]
+                to: refunded

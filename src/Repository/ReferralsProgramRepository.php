@@ -1,8 +1,17 @@
 <?php
 
+/*
+* This file is part of the Odiseo Referrals Plugin package, a commercial software.
+* Only users who have purchased a valid license and accept to the terms of the License Agreement can install
+* and use this program.
+*
+* Copyright (c) 2018-2022 Odiseo - Pablo D'amico
+*/
+
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -79,6 +88,11 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
             ->setParameter('customer', $customer)
             ->innerJoin('a.payments', 'payment')
             ->andWhere('payment.amount != 0')
+            ->andWhere('payment.state IN (:state)')
+            ->setParameter('state', [
+                CustomerPayment::STATE_NEW,
+                CustomerPayment::STATE_COMPLETED,
+            ])
             ->getQuery()
             ->getSingleScalarResult()
         ;

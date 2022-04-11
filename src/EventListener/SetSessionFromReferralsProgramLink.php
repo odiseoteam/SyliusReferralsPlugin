@@ -81,7 +81,7 @@ class SetSessionFromReferralsProgramLink
 
         $customer = null;
         $shopUser = $token->getUser();
-        //dd($shopUser);
+
         if ($shopUser instanceof ShopUserInterface) {
             $customer = $shopUser->getCustomer();
             if ($customer instanceof CustomerInterface) {

@@ -1,9 +1,9 @@
 # This file is part of the Odiseo Referrals Plugin package, a commercial software.
 # Only users who have purchased a valid license and accept to the terms of the License Agreement can install
 # and use this program.
-# Copyright (c) 2018-2022 - Pablo D'amico
+# Copyright (c) 2018-2022 Odiseo - Pablo D'amico
 
 imports:
-    - { resource: state_machine.yaml }
-    - { resource: sylius_ui.yml }
-    - { resource: resources/referrals_program.yaml }
+    - { resource: state_machine/customer_payment.yaml }
+    - { resource: state_machine/order.yaml }
+    - { resource: state_machine/order_payment.yaml }
