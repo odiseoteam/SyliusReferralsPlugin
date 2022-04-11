@@ -16,6 +16,13 @@ trait ReferralsProgramsTrait
      */
     private $referralsPrograms;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment", mappedBy="customer")
+     *
+     * @var Collection|VendorPaymentInterface[]
+     */
+    protected $payments;    
+
     public function __construct()
     {
         parent::__construct();

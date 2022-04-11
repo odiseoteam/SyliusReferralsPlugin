@@ -11,6 +11,12 @@ sylius_resource:
                 model: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram
                 interface: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface
                 #form: Odiseo\SyliusMarketplacePlugin\Form\Type\Payout\VendorGatewayConfigType
-                #repository: Odiseo\SyliusMarketplacePlugin\Repository\VendorGatewayConfigRepository
+                repository: Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository
                 controller: Odiseo\SyliusReferralsPlugin\Controller\ReferralsProgramController
                 #factory: Sylius\Component\Resource\Factory\Factory
+
+        odiseo_sylius_referrals_plugin.referrals_program_view:
+            classes:
+                model: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramView
+                interface: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramViewInterface
+                repository: Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository

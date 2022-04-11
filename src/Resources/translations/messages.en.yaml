@@ -8,3 +8,9 @@ odiseo_sylius_referrals_plugin:
         share_link: Share link
         referrals_program_stats: Referrals Program Stats
         manage_referrals_program: Manage Referrals Program
+        max_views: Max views
+        max_views_description: Product that referred the most users
+        month_referrals: Month's Referrals
+        month_referrals_description: Users followed their referral links
+        average: Average
+        average_description: Referrals who made a purchase

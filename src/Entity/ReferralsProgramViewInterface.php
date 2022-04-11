@@ -8,11 +8,11 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ReferralsProgramViewInterface extends ResourceInterface
 {
     /**
-     * @param ReferralsProgramInterface|null $affiliateProgram
+     * @param ReferralsProgramInterface|null $referralsProgram
      *
      * @return void
      */
-    public function setReferralsProgram(?ReferralsProgramInterface $affiliateProgram): void;
+    public function setReferralsProgram(?ReferralsProgramInterface $referralsProgram): void;
 
     /**
      * @return ReferralsProgramInterface|null

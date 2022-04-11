@@ -4,7 +4,7 @@ namespace Odiseo\SyliusReferralsPlugin\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -78,6 +78,20 @@ interface ReferralsProgramInterface extends ResourceInterface, TimestampableInte
      * @return void
      */
     public function removeView(?ReferralsProgramViewInterface $view): void;
+
+    /**
+     * @param CustomerPaymentInterface $payment
+     *
+     * @return void
+     */
+    public function addPayment(CustomerPaymentInterface $payment): void;
+
+    /**
+     * @param CustomerPaymentInterface $payment
+     *
+     * @return void
+     */
+    public function removePayment(CustomerPaymentInterface $payment): void;    
 
     /**
      * @return \DateTimeInterface|null

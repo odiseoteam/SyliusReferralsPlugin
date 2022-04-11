@@ -2,11 +2,12 @@
 
 namespace Odiseo\SyliusReferralsPlugin\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramViewInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -42,7 +43,7 @@ class ReferralsProgram implements ReferralsProgramInterface
     private $customer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\Product")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Core\Model\Product")
      */
     private $product;
 
@@ -52,6 +53,15 @@ class ReferralsProgram implements ReferralsProgramInterface
      * @var Collection
      */
     private $views;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment", inversedBy="referralsPrograms")
+     * @ORM\JoinTable(name="odiseo_referrals_program_payments",
+     *      joinColumns={@ORM\JoinColumn(name="referralsprogram_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="customerpayment_id", referencedColumnName="id", unique=true)}
+     * )
+     */
+    private $payments;    
 
     /**
      * @ORM\Column(type="datetime", name="expire_at", nullable=false)
@@ -79,6 +89,8 @@ class ReferralsProgram implements ReferralsProgramInterface
         $this->expireAt = new \DateTime();
         $this->expireAt->modify("+15 day");
 
+        $this->payments = new ArrayCollection();
+        $this->views = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
@@ -184,6 +196,26 @@ class ReferralsProgram implements ReferralsProgramInterface
             $view->setReferralsProgram(null);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(CustomerPaymentInterface $payment): void
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments->add($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePayment(CustomerPaymentInterface $payment): void
+    {
+        if ($this->payments->contains($payment)) {
+            $this->payments->removeElement($payment);
+        }
+    }    
 
     /**
      * {@inheritdoc}

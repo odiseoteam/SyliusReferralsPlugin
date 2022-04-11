@@ -4,12 +4,11 @@ namespace Odiseo\SyliusReferralsPlugin\Controller;
 
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
-//use App\Entity\Customer\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 //use App\Entity\User\AdminUserInterface;
 //use App\Entity\User\ShopUserInterface;
-//use App\Repository\AffiliateProgram\AffiliateProgramRepository;
-//use App\Repository\AffiliateProgram\AffiliateProgramViewRepository;
-//use App\Repository\Customer\CustomerRepositoryInterface;
+use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository;
+use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\User\Model\UserInterface;
@@ -20,35 +19,28 @@ use Webmozart\Assert\Assert;
 
 class ReferralsProgramController extends ResourceController
 {
-    /*
     public function getStatistics(Request $request): Response
     {   
         $template = $request->get('template');
-
-        $customer = $this->resolveCustomer($this->getUser());
+        
+        $customer = $this->getUser()->getCustomer();
 
         $dateTime = new \DateTime();
-        $repository = $this->getAffiliateProgramRepository();
+        $repository = $this->getReferralsProgramRepository();
 
         $maxViewsReferedPage    = $repository->findMaxViewReferedPageByCustomer($customer);
         $maxProductReferedPage  = $repository->findMaxProductReferedPageByCustomer($customer);
-        $pendingPayouts         = $repository->findPendingPayoutsByCustomer($customer);
         $average                = $this->averageByCustomer($customer);
-        $monthReferrals         = $this->getAffiliateProgramViewRepository()->findMonthReferralsByCustomer($customer, $dateTime);
-        $earnings               = $repository->findLastMonthEarningsByCustomer($customer, $dateTime);
-        $totalEarnings          = $repository->totalEarningsByCustomer($customer);
+        $monthReferrals         = $this->getReferralsProgramViewRepository()->findMonthReferralsByCustomer($customer, $dateTime);
 
         return $this->render($template, [
             'maxViewsReferedPage' => $maxViewsReferedPage,
             'maxProductReferedPage' => $maxProductReferedPage,
             'average' => $average,
-            'pendingPayouts' => $pendingPayouts,
             'monthReferrals' => $monthReferrals,
-            'earnings' => $earnings,
-            'totalEarnings' => $totalEarnings
         ]);
     }
-    */
+
     public function createFromProduct(Request $request): Response
     {
         $product = $this->getProductRepository()->find($request->query->getInt('product'));
@@ -77,22 +69,16 @@ class ReferralsProgramController extends ResourceController
     {
         return $this->get('sylius.repository.product');
     }
-/*
-    private function getAffiliateProgramRepository(): AffiliateProgramRepository
+
+    private function getReferralsProgramRepository(): ReferralsProgramRepository
     {
-        return $this->get('app.repository.affiliate_program');
+        return $this->get('odiseo_sylius_referrals_plugin.repository.referrals_program');
     }
 
-    private function getAffiliateProgramViewRepository(): AffiliateProgramViewRepository
+    private function getReferralsProgramViewRepository(): ReferralsProgramViewRepository
     {
-        return $this->get('app.repository.affiliate_program_view');
+        return $this->get('odiseo_sylius_referrals_plugin.repository.referrals_program_view');
     }
-
-    private function getCustomerRepository(): CustomerRepositoryInterface
-    {
-        return $this->get('sylius.repository.customer');
-    }
-*/
 
     private function generateLink(ReferralsProgramInterface $referralsProgram): void
     {
@@ -113,24 +99,11 @@ class ReferralsProgramController extends ResourceController
     {
         return uniqid('ap_', true);
     }
-/*
-    private function resolveCustomer(UserInterface $user): CustomerInterface
-    {
-        if ($user instanceof AdminUserInterface) {
-            $customer = $this->getCustomerRepository()->findCustomerByVendor($user->getVendor());
-        } elseif ($user instanceof ShopUserInterface) {
-            $customer = $user->getCustomer();
-        }
-
-        Assert::notNull($customer);
-
-        return $customer;
-    }
 
     private function averageByCustomer(CustomerInterface $customer): int
     {
-        $sum = $this->getAffiliateProgramViewRepository()->findViewsByCustomer($customer);
-        $count = $this->getAffiliateProgramRepository()->findCountPaymentsByCustomer($customer);
+        $sum = $this->getReferralsProgramViewRepository()->findViewsByCustomer($customer);
+        $count = $this->getReferralsProgramRepository()->findCountPaymentsByCustomer($customer);
 
         if ($count == 0 || $sum == 0) {
             return 0;
@@ -138,5 +111,4 @@ class ReferralsProgramController extends ResourceController
 
         return (int) (($count / $sum) * 100);
     }
-*/    
 }

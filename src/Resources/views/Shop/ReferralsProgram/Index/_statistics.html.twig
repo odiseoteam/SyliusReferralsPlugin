@@ -1,0 +1,61 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div id="referrals_program_statistics" class="ui three grid center aligned horizontal segment">
+    <div class="row">
+        <div class="five wide column ui segment">
+            <div class="card-body">
+                <h5>{{ 'odiseo_sylius_referrals_plugin.ui.max_views'|trans }}</h5>
+                <p><small class="text-muted">{{ 'odiseo_sylius_referrals_plugin.ui.max_views_description'|trans }}</small></p>
+                <h2>
+                    {{ maxViewsReferedPage }}
+                </h2>
+                <h5>
+                    {% if maxProductReferedPage %}
+                    <a href="{{ path('sylius_shop_product_show', { slug: maxProductReferedPage.slug }) }}">{{ maxProductReferedPage.name }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </h5>
+            </div>
+        </div>
+        <div class="five wide column ui segment">
+            <div class="card-body">
+                <h5>{{ 'odiseo_sylius_referrals_plugin.ui.month_referrals'|trans }}</h5>
+                <p><small class="text-muted">{{ 'odiseo_sylius_referrals_plugin.ui.month_referrals_description'|trans }}</small></p>
+                <h2>{{ monthReferrals }}</h2>
+            </div>
+        </div>
+        <div class="five wide column ui segment">
+            <div class="card-body">
+                <h5>{{ 'odiseo_sylius_referrals_plugin.ui.average'|trans }}</h5>
+                <p><small class="text-muted">{{ 'odiseo_sylius_referrals_plugin.ui.average_description'|trans }}</small></p>
+                <h2 class="card-text p-0">{{ average }} %</h2>
+            </div>
+        </div>
+    </div>
+    {#
+    <div class="card-group">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title mb-0 p-0">{{ 'app.affiliate_program.pending_payouts'|trans }}</h5>
+                <p class="card-text m-0 mb-3"><small class="text-muted">{{ 'app.affiliate_program.pending_payouts_description'|trans }}</small></p>
+                <h2 class="card-text p-0">{{ money.convertAndFormat(pendingPayouts) }}</h2>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title mb-0 p-0">{{ 'app.affiliate_program.month_earnings'|trans }}</h5>
+                <p class="card-text m-0 mb-3"><small class="text-muted">{{ 'app.affiliate_program.month_earnings_description'|trans }}</small></p>
+                <h2 class="card-text p-0">{{ money.convertAndFormat(earnings) }}</h2>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title mb-0 p-0">{{ 'app.affiliate_program.total_earnings'|trans }}</h5>
+                <p class="card-text m-0 mb-3"><small class="text-muted">{{ 'app.affiliate_program.total_earnings_description'|trans }}</small></p>
+                <h2 class="card-text p-0">{{ money.convertAndFormat(totalEarnings) }}</h2>
+            </div>
+        </div>
+    </div>
+    #}
+</div>
