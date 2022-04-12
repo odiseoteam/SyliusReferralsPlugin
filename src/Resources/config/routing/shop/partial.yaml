@@ -3,6 +3,3 @@ odiseo_sylius_referrals_plugin_shop_product_referrals_program:
     methods: [POST]
     defaults:
         _controller: odiseo_sylius_referrals_plugin.controller.referrals_program:createFromProduct
-        _sylius:
-            section: shop
-            permission: true

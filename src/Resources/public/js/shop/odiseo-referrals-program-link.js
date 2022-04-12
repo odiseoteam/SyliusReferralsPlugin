@@ -16,7 +16,8 @@
                 }
     
                 this.setAttribute('disabled', 'disabled');
-                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+                this.classList.add('loading');
+                //this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
     
                 $.ajax({
                     type: 'POST',
@@ -27,7 +28,7 @@
                         this.removeAttribute('disabled');
                         document.getElementById('sylius-cart-validation-error').innerText = 'Error!';
                         document.getElementById('sylius-cart-validation-error').classList.remove('d-none');
-                        //element.closest('form').classList.remove('loading');
+                        this.classList.remove('loading');
                     },
                     success(JSONresponse) {
                         response = JSON.parse(JSONresponse);
@@ -41,6 +42,7 @@
                         else {
                             window.location.replace(response.responseURL);
                         }
+                        this.classList.remove('loading');
                     },
                 });            
             });
