@@ -46,7 +46,7 @@ class ReferralsProgram implements ReferralsProgramInterface
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", inversedBy="referralsPrograms")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer")
      */
     private $customer;
 

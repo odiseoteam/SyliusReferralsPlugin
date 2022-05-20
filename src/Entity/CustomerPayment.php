@@ -80,7 +80,7 @@ class CustomerPayment implements CustomerPaymentInterface
     private $referralsPrograms;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", inversedBy="payments")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer")
      *
      * @var CustomerInterface|null
      */

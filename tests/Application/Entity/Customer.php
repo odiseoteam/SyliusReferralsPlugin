@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Tests\Odiseo\SyliusReferralsPlugin\Application\Entity;
           
 use Doctrine\ORM\Mapping as ORM;
-use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramsTrait;
 use Sylius\Component\Core\Model\Customer as BaseCustomer;
 
 /**
@@ -22,5 +21,5 @@ use Sylius\Component\Core\Model\Customer as BaseCustomer;
  */
 class Customer extends BaseCustomer 
 {
-    use ReferralsProgramsTrait;
+
 }
