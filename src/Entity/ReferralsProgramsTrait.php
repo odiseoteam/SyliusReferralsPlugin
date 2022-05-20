@@ -36,6 +36,7 @@ trait ReferralsProgramsTrait
         parent::__construct();
         
         $this->referralsPrograms = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -63,6 +64,42 @@ trait ReferralsProgramsTrait
     {
         if ($this->referralsPrograms->contains($referralProgram)) {
             $this->referralsPrograms->removeElement($referralProgram);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayment(CustomerPaymentInterface $payment): bool
+    {
+        return $this->payments->contains($payment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(CustomerPaymentInterface $payment): void
+    {
+        if (!$this->hasPayment($payment)) {
+            $this->payments->add($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePayment(CustomerPaymentInterface $payment): void
+    {
+        if ($this->hasPayment($payment)) {
+            $this->payments->removeElement($payment);
         }
     }
 }
