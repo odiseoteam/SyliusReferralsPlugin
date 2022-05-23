@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Webmozart\Assert\Assert;
 
@@ -28,13 +29,17 @@ class ReferralsProgramController extends ResourceController
 {
     public function getStatistics(Request $request): Response
     {
-        /** @var string|null $template **/
+        /** @var string $template **/
         $template = $request->attributes->get('template');
 
         /** @var ShopUserInterface|null $user **/
         $user = $this->getUser();
 
         $customer = $this->getCustomer($user);
+
+        if (null === $customer) {
+            throw new HttpException(Response::HTTP_UNAUTHORIZED);
+        }
 
         $dateTime = new \DateTime();
         $repository = $this->getReferralsProgramRepository();
@@ -63,6 +68,10 @@ class ReferralsProgramController extends ResourceController
 
         $customer = $this->getCustomer($user);
 
+        if (null === $customer) {
+            throw new HttpException(Response::HTTP_UNAUTHORIZED);
+        }
+
         $referralsProgram = new ReferralsProgram();
         $referralsProgram->setCustomer($customer);
         $referralsProgram->setProduct($product);
@@ -81,11 +90,7 @@ class ReferralsProgramController extends ResourceController
 
     private function getCustomer(?ShopUserInterface $user): ?CustomerInterface
     {
-        if ($user instanceof ShopUserInterface && null !== $user->getCustomer()) {
-            return $user->getCustomer();
-        } else {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED);
-        }
+        return $user instanceof ShopUserInterface && null !== $user->getCustomer() ? $user->getCustomer() : null;
     }
 
     private function getProductRepository(): ProductRepository
@@ -120,7 +125,10 @@ class ReferralsProgramController extends ResourceController
         $product = $referralsProgram->getProduct();
         Assert::notNull($product);
 
-        $link = $this->get('router')->generate(
+        /** @var RouterInterface $router **/
+        $router = $this->get('router');
+
+        $link = $router->generate(
             'sylius_shop_product_show',
             [
                 'slug' => $product->getSlug(),
