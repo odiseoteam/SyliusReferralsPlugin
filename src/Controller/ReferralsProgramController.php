@@ -13,25 +13,28 @@ namespace Odiseo\SyliusReferralsPlugin\Controller;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-//use App\Entity\User\AdminUserInterface;
-//use App\Entity\User\ShopUserInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Webmozart\Assert\Assert;
 
 class ReferralsProgramController extends ResourceController
 {
     public function getStatistics(Request $request): Response
-    {   
-        $template = $request->get('template');
-        
-        $customer = $this->getUser()->getCustomer();
+    {
+        /** @var string|null $template **/
+        $template = $request->attributes->get('template');
+
+        /** @var ShopUserInterface|null $user **/
+        $user = $this->getUser();
+
+        $customer = $this->getCustomer($user);
 
         $dateTime = new \DateTime();
         $repository = $this->getReferralsProgramRepository();
@@ -39,7 +42,8 @@ class ReferralsProgramController extends ResourceController
         $maxViewsReferedPage    = $repository->findMaxViewReferedPageByCustomer($customer);
         $maxProductReferedPage  = $repository->findMaxProductReferedPageByCustomer($customer);
         $average                = $this->averageByCustomer($customer);
-        $monthReferrals         = $this->getReferralsProgramViewRepository()->findMonthReferralsByCustomer($customer, $dateTime);
+        $monthReferrals         = $this->getReferralsProgramViewRepository()
+                                    ->findMonthReferralsByCustomer($customer, $dateTime);
 
         return $this->render($template, [
             'maxViewsReferedPage' => $maxViewsReferedPage,
@@ -53,9 +57,11 @@ class ReferralsProgramController extends ResourceController
     {
         $product = $this->getProductRepository()->find($request->query->getInt('product'));
         Assert::notNull($product);
-        
-        $customer = $this->getUser()->getCustomer();
-        Assert::notNull($customer);
+
+        /** @var ShopUserInterface|null $user **/
+        $user = $this->getUser();
+
+        $customer = $this->getCustomer($user);
 
         $referralsProgram = new ReferralsProgram();
         $referralsProgram->setCustomer($customer);
@@ -68,34 +74,56 @@ class ReferralsProgramController extends ResourceController
         $em->flush();
 
         return $this->json([
-            'link' => $referralsProgram->getLink(), 
+            'link' => $referralsProgram->getLink(),
             'responseURL' => $request->getUri(),
         ]);
     }
 
+    private function getCustomer(?ShopUserInterface $user): ?CustomerInterface
+    {
+        if ($user instanceof ShopUserInterface && null !== $user->getCustomer()) {
+            return $user->getCustomer();
+        } else {
+            throw new HttpException(Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
     private function getProductRepository(): ProductRepository
     {
-        return $this->get('sylius.repository.product');
+        /** @var ProductRepository $productRepository **/
+        $productRepository = $this->get('sylius.repository.product');
+
+        return $productRepository;
     }
 
     private function getReferralsProgramRepository(): ReferralsProgramRepository
     {
-        return $this->get('odiseo_sylius_referrals_plugin.repository.referrals_program');
+        /** @var ReferralsProgramRepository $referralsProgramRepository **/
+        $referralsProgramRepository = $this->get('odiseo_sylius_referrals_plugin.repository.referrals_program');
+
+        return $referralsProgramRepository;
     }
 
     private function getReferralsProgramViewRepository(): ReferralsProgramViewRepository
     {
-        return $this->get('odiseo_sylius_referrals_plugin.repository.referrals_program_view');
+        /** @var ReferralsProgramViewRepository $referralsProgramViewRepository **/
+        $referralsProgramViewRepository = $this
+                                            ->get('odiseo_sylius_referrals_plugin.repository.referrals_program_view');
+
+        return $referralsProgramViewRepository;
     }
 
     private function generateLink(ReferralsProgramInterface $referralsProgram): void
     {
         $referralsProgram->setTokenValue($this->generateTokenValue());
 
+        $product = $referralsProgram->getProduct();
+        Assert::notNull($product);
+
         $link = $this->get('router')->generate(
             'sylius_shop_product_show',
             [
-                'slug' => $referralsProgram->getProduct()->getSlug(),
+                'slug' => $product->getSlug(),
                 ReferralsProgramInterface::TOKEN_PARAM_NAME => $referralsProgram->getTokenValue()
             ],
             UrlGenerator::ABSOLUTE_URL

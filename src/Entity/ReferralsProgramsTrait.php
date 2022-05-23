@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-trait ReferralsProgramsTrait 
+trait ReferralsProgramsTrait
 {
     /**
      * @ORM\OneToMany(targetEntity="Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram", mappedBy="customer")
@@ -29,12 +29,12 @@ trait ReferralsProgramsTrait
      *
      * @var Collection|VendorPaymentInterface[]
      */
-    protected $payments;    
+    protected $payments;
 
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->referralsPrograms = new ArrayCollection();
         $this->payments = new ArrayCollection();
     }

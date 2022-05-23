@@ -74,7 +74,7 @@ final class CustomerPaymentManager implements CustomerPaymentManagerInterface
             return;
         }
 
-        $amount = (int) $order->getTotal();
+        $amount = $order->getTotal();
 
         /** @var CustomerPaymentInterface $customerPayment */
         $customerPayment = $this->customerPaymentFactory->createNew();
@@ -95,7 +95,6 @@ final class CustomerPaymentManager implements CustomerPaymentManagerInterface
     public function markPaymentsAsNew(OrderInterface $order): void
     {
         if ($order->getId()) {
-            /** @var Collection|CustomerPaymentInterface[] $payments */
             $payments = $this->customerPaymentRepository->findByOrder($order);
 
             foreach ($payments as $payment) {

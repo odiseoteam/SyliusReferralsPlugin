@@ -30,28 +30,36 @@ class ReferralsProgram implements ReferralsProgramInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @var int|null
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", name="token_value", nullable=false)
+     *
+     * @var string|null
      */
     private $tokenValue;
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     *
+     * @var string|null
      */
     private $link;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer")
+     *
+     * @var CustomerInterface|null
      */
     private $customer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Core\Model\Product")
+     *
+     * @var ProductInterface|null
      */
     private $product;
 
@@ -68,26 +76,28 @@ class ReferralsProgram implements ReferralsProgramInterface
      *      joinColumns={@ORM\JoinColumn(name="referralsprogram_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="customerpayment_id", referencedColumnName="id", unique=true)}
      * )
+     *
+     * @var ArrayCollection|null
      */
-    private $payments;    
+    private $payments;
 
     /**
      * @ORM\Column(type="datetime", name="expire_at", nullable=false)
-     * 
+     *
      * @var \DateTimeInterface|null
      */
     protected $expireAt;
 
     /**
      * @ORM\Column(type="datetime", name="created_at", nullable=false)
-     * 
+     *
      * @var \DateTimeInterface|null
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at", nullable=false)
-     * 
+     *
      * @var \DateTimeInterface|null
      */
     protected $updatedAt;
@@ -190,7 +200,9 @@ class ReferralsProgram implements ReferralsProgramInterface
     {
         if (!$this->views->contains($view)) {
             $this->views->add($view);
-            $view->setReferralsProgram($this);
+            if (null !== $view) {
+                $view->setReferralsProgram($this);
+            }
         }
     }
 
@@ -201,7 +213,9 @@ class ReferralsProgram implements ReferralsProgramInterface
     {
         if ($this->views->contains($view)) {
             $this->views->removeElement($view);
-            $view->setReferralsProgram(null);
+            if (null !== $view) {
+                $view->setReferralsProgram(null);
+            }
         }
     }
 
@@ -210,8 +224,10 @@ class ReferralsProgram implements ReferralsProgramInterface
      */
     public function addPayment(CustomerPaymentInterface $payment): void
     {
-        if (!$this->payments->contains($payment)) {
-            $this->payments->add($payment);
+        if (null !== $this->payments) {
+            if (!$this->payments->contains($payment)) {
+                $this->payments->add($payment);
+            }
         }
     }
 
@@ -220,10 +236,12 @@ class ReferralsProgram implements ReferralsProgramInterface
      */
     public function removePayment(CustomerPaymentInterface $payment): void
     {
-        if ($this->payments->contains($payment)) {
-            $this->payments->removeElement($payment);
+        if (null !== $this->payments) {
+            if ($this->payments->contains($payment)) {
+                $this->payments->removeElement($payment);
+            }
         }
-    }    
+    }
 
     /**
      * {@inheritdoc}

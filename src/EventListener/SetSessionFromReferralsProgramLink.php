@@ -7,6 +7,7 @@ use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramView;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -40,6 +41,8 @@ class SetSessionFromReferralsProgramLink
         }
 
         $request = $event->getRequest();
+
+        /** @var Session $session */
         $session = $request->getSession();
 
         if (!$session->isStarted()) {
@@ -79,7 +82,6 @@ class SetSessionFromReferralsProgramLink
         $referralsProgramView->setReferralsProgram($referralsProgram);
         $referralsProgramView->setIp($request->getClientIp());
 
-        $customer = null;
         $shopUser = $token->getUser();
 
         if ($shopUser instanceof ShopUserInterface) {
@@ -88,11 +90,11 @@ class SetSessionFromReferralsProgramLink
                 if ($customer === $referralsProgram->getCustomer()) {
                     return;
                 }
-                
+
                 $referralsProgramView->setCustomer($customer);
             }
         }
-        
+
         $this->referralsProgramViewRepository->add($referralsProgramView);
 
         $session->set(ReferralsProgramInterface::TOKEN_PARAM_NAME, $tokenValue);

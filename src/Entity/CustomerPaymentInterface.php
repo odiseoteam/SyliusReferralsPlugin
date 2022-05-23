@@ -59,7 +59,7 @@ interface CustomerPaymentInterface extends ResourceInterface, TimestampableInter
     /**
      * @return array
      */
-    public function getDetails(): array;
+    public function getDetails(): ?array;
 
     /**
      * @param array $details
