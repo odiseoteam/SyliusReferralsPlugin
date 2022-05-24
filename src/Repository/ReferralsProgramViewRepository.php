@@ -30,6 +30,7 @@ class ReferralsProgramViewRepository extends EntityRepository
     public function findMonthReferralsByCustomer(CustomerInterface $customer, \DateTimeInterface $dateTime): int
     {
         $results = $this->createQueryBuilder('view')
+            ->select('view')
             ->innerJoin('view.referralsProgram', 'a', 'WITH', 'a.customer = :customer')
             ->andWhere('MONTH(view.createdAt) = :month')
             ->setParameter('customer', $customer)
