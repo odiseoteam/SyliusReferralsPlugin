@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://odiseo.com.ar/" target="_blank" title="Odiseo">
+    <a href="https://odiseo.io/" target="_blank" title="Odiseo">
         <img src="https://github.com/odiseoteam/SyliusReferralsPlugin/blob/master/sylius-referrals-plugin.png" alt="Sylius Referrals Plugin" />
     </a>
     <br />
@@ -42,6 +42,7 @@ You can see this plugin in action in our Sylius Demo application.
 
 ## Documentation
 
+- [Installation](doc/installation.md)
 - [Tests](doc/tests.md)
 
 ## Credits

@@ -1,0 +1,7 @@
+odiseo_sylius_referrals_plugin_shop_account:
+    resource: shop/account.yaml
+    prefix: /account
+
+odiseo_sylius_referrals_plugin_shop_partial:
+    resource: shop/partial.yaml
+    prefix: /_partial

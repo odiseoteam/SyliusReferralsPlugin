@@ -1,8 +1,5 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
-{#
-{% set definition = resources.definition %}
-{% set data = resources.data %}
-#}
+
 {% set event_prefix = metadata.applicationName ~ '.shop.' ~ metadata.name ~ '.index' %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}

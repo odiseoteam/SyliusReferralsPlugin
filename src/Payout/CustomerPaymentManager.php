@@ -1,18 +1,9 @@
 <?php
 
-/*
-* This file is part of the Odiseo Referrals Plugin package, a commercial software.
-* Only users who have purchased a valid license and accept to the terms of the License Agreement can install
-* and use this program.
-*
-* Copyright (c) 2018-2022 Odiseo - Pablo D'amico
-*/
-
 declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Payout;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManager;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface;

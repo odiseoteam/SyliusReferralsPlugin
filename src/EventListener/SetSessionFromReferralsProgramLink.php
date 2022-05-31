@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Odiseo\SyliusReferralsPlugin\EventListener;
 
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
