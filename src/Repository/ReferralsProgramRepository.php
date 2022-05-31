@@ -61,23 +61,23 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
     }
 
     public function findMaxProductReferedPageByCustomer(CustomerInterface $customer): ?ProductInterface
-    {   
+    {
         $referralsProgram = $this->findReferedPageByCustomer($customer);
-        if (!$referralsProgram || $referralsProgram->getViews()->count() === 0) {
+        if (null === $referralsProgram || $referralsProgram->getViews()->count() === 0) {
             return null;
         }
-        
+
         return $referralsProgram->getProduct();
     }
 
     public function findMaxViewReferedPageByCustomer(CustomerInterface $customer): int
     {
         $referralsProgram = $this->findReferedPageByCustomer($customer);
-        if (!$referralsProgram) {
+        if (null === $referralsProgram) {
             return 0;
         }
 
-        return (int) $referralsProgram->getViews()->count();
+        return $referralsProgram->getViews()->count();
     }
 
     public function findCountPaymentsByCustomer(CustomerInterface $customer): int

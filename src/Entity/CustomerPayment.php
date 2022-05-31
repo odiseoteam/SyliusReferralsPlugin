@@ -80,7 +80,7 @@ class CustomerPayment implements CustomerPaymentInterface
     private $referralsPrograms;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", inversedBy="payments")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer")
      *
      * @var CustomerInterface|null
      */
@@ -88,14 +88,14 @@ class CustomerPayment implements CustomerPaymentInterface
 
     /**
      * @ORM\Column(type="datetime", name="created_at", nullable=false)
-     * 
+     *
      * @var \DateTimeInterface|null
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", name="updated_at", nullable=false)
-     * 
+     *
      * @var \DateTimeInterface|null
      */
     protected $updatedAt;
@@ -166,7 +166,7 @@ class CustomerPayment implements CustomerPaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getDetails(): array
+    public function getDetails(): ?array
     {
         return $this->details;
     }
@@ -226,7 +226,9 @@ class CustomerPayment implements CustomerPaymentInterface
     {
         if (!$this->referralsPrograms->contains($referralsProgram)) {
             $this->referralsPrograms->add($referralsProgram);
-            $referralsProgram->addPayment($this);
+            if (null !== $referralsProgram) {
+                $referralsProgram->addPayment($this);
+            }
         }
     }
 
@@ -237,7 +239,9 @@ class CustomerPayment implements CustomerPaymentInterface
     {
         if ($this->referralsPrograms->contains($referralsProgram)) {
             $this->referralsPrograms->removeElement($referralsProgram);
-            $referralsProgram->removePayment($this);
+            if (null !== $referralsProgram) {
+                $referralsProgram->removePayment($this);
+            }
         }
     }
 }

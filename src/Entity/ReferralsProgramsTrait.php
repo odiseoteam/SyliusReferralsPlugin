@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-trait ReferralsProgramsTrait 
+trait ReferralsProgramsTrait
 {
     /**
      * @ORM\OneToMany(targetEntity="Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram", mappedBy="customer")
@@ -29,13 +29,14 @@ trait ReferralsProgramsTrait
      *
      * @var Collection|VendorPaymentInterface[]
      */
-    protected $payments;    
+    protected $payments;
 
     public function __construct()
     {
         parent::__construct();
-        
+
         $this->referralsPrograms = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -63,6 +64,42 @@ trait ReferralsProgramsTrait
     {
         if ($this->referralsPrograms->contains($referralProgram)) {
             $this->referralsPrograms->removeElement($referralProgram);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayment(CustomerPaymentInterface $payment): bool
+    {
+        return $this->payments->contains($payment);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addPayment(CustomerPaymentInterface $payment): void
+    {
+        if (!$this->hasPayment($payment)) {
+            $this->payments->add($payment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removePayment(CustomerPaymentInterface $payment): void
+    {
+        if ($this->hasPayment($payment)) {
+            $this->payments->removeElement($payment);
         }
     }
 }

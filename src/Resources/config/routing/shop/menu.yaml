@@ -6,7 +6,6 @@ odiseo_sylius_referrals_plugin_shop_referrals_program_index:
         _sylius:
             section: shop
             permission: true
-#            grid: app_affiliate_program
             template: "@OdiseoSyliusReferralsPlugin/Shop/ReferralsProgram/index.html.twig"
             vars:
                 header: odiseo_sylius_referrals_plugin.ui.referrals_program_stats

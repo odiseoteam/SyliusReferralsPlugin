@@ -99,7 +99,7 @@ interface ReferralsProgramInterface extends ResourceInterface, TimestampableInte
      *
      * @return void
      */
-    public function removePayment(CustomerPaymentInterface $payment): void;    
+    public function removePayment(CustomerPaymentInterface $payment): void;
 
     /**
      * @return \DateTimeInterface|null

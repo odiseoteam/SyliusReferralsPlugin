@@ -24,7 +24,7 @@ class ReferralsProgramView implements ReferralsProgramViewInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     *
      * @var int|null
      */
     protected $id;
@@ -39,7 +39,7 @@ class ReferralsProgramView implements ReferralsProgramViewInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", cascade={"persist", "remove"})
-     * 
+     *
      * @var CustomerInterface|null
      */
     private $customer;
@@ -55,7 +55,7 @@ class ReferralsProgramView implements ReferralsProgramViewInterface
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      *
-     * @var \DateTimeInterface|null
+     * @var \DateTimeInterface
      */
     protected $createdAt;
 

@@ -24,7 +24,7 @@ class ReferralsProgramViewRepository extends EntityRepository
             ->getResult()
         ;
 
-        return (int) count($results);
+        return count($results);
     }
 
     public function findMonthReferralsByCustomer(CustomerInterface $customer, \DateTimeInterface $dateTime): int
@@ -40,6 +40,6 @@ class ReferralsProgramViewRepository extends EntityRepository
             ->getResult()
         ;
 
-        return (int) count($results);
+        return count($results);
     }
 }
