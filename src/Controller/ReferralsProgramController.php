@@ -12,6 +12,7 @@ namespace Odiseo\SyliusReferralsPlugin\Controller;
 
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository;
@@ -60,6 +61,7 @@ class ReferralsProgramController extends ResourceController
 
     public function createFromProduct(Request $request): Response
     {
+        /** @var ProductInterface|null $product */
         $product = $this->getProductRepository()->find($request->query->getInt('product'));
         Assert::notNull($product);
 

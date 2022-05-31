@@ -59,10 +59,11 @@ class SetSessionFromReferralsProgramLink
             return;
         }
 
+        /** @var ReferralsProgramInterface|null $referralsProgram */
         $referralsProgram = $this->referralsProgramRepository->findOneBy([
             'tokenValue' => $tokenValue
         ]);
-        if (!$referralsProgram) {
+        if (null === $referralsProgram) {
             $session->getFlashBag()->add('error', 'The referral link is invalid!');
 
             return;

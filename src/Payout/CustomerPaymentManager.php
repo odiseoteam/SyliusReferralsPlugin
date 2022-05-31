@@ -66,11 +66,12 @@ final class CustomerPaymentManager implements CustomerPaymentManagerInterface
             return;
         }
 
+        /** @var ReferralsProgramInterface|null $referralsProgram */
         $referralsProgram = $this->referralsProgramRepository->findOneBy([
             'tokenValue' => $session->get(ReferralsProgramInterface::TOKEN_PARAM_NAME)
         ]);
 
-        if (!$referralsProgram) {
+        if (null === $referralsProgram) {
             return;
         }
 

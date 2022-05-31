@@ -112,4 +112,9 @@ interface ReferralsProgramInterface extends ResourceInterface, TimestampableInte
      * @return void
      */
     public function setExpireAt(\DateTimeInterface $expireAt): void;
+
+    /**
+     * @return bool
+     */
+    public function isExpired(): bool;
 }
