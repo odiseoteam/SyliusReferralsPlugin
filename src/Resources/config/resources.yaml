@@ -1,0 +1,2 @@
+imports:
+    - { resource: resources/referrals_program.yaml }

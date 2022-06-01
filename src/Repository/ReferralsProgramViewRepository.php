@@ -7,7 +7,7 @@ namespace Odiseo\SyliusReferralsPlugin\Repository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class ReferralsProgramViewRepository extends EntityRepository
+class ReferralsProgramViewRepository extends EntityRepository implements ReferralsProgramViewRepositoryInterface
 {
     public function findViewsByCustomer(CustomerInterface $customer): int
     {

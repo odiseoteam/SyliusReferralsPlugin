@@ -18,14 +18,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class SetSessionFromReferralsProgramLink
 {
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /** @var ReferralsProgramRepository $referralsProgramRepository */
-    private $referralsProgramRepository;
-
-    /** @var ReferralsProgramViewRepository $referralsProgramViewRepository */
-    private $referralsProgramViewRepository;
+    private TokenStorageInterface $tokenStorage;
+    private ReferralsProgramRepository $referralsProgramRepository;
+    private ReferralsProgramViewRepository $referralsProgramViewRepository;
 
     public function __construct(
         TokenStorageInterface $tokenStorage,
@@ -65,6 +60,7 @@ class SetSessionFromReferralsProgramLink
         $referralsProgram = $this->referralsProgramRepository->findOneBy([
             'tokenValue' => $tokenValue
         ]);
+
         if (null === $referralsProgram) {
             $session->getFlashBag()->add('error', 'The referral link is invalid!');
 

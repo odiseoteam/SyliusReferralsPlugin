@@ -7,5 +7,5 @@ odiseo_sylius_referrals_plugin_shop_account_referrals_program_index:
             section: shop_account
             template: "@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/index.html.twig"
             vars:
-                header: odiseo_sylius_referrals_plugin.ui.referrals_program_stats
+                header: odiseo_sylius_referrals_plugin.ui.referrals_program
                 subheader: odiseo_sylius_referrals_plugin.ui.manage_referrals_program

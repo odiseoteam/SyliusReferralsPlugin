@@ -13,9 +13,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 class CustomerPaymentRepository extends EntityRepository implements CustomerPaymentRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createListByCustomerQueryBuilder(CustomerInterface $customer): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -29,9 +26,6 @@ class CustomerPaymentRepository extends EntityRepository implements CustomerPaym
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findByOrder(OrderInterface $order): array
     {
         return $this->createQueryBuilder('o')
@@ -42,9 +36,6 @@ class CustomerPaymentRepository extends EntityRepository implements CustomerPaym
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findNew(): array
     {
         return $this->createQueryBuilder('o')
@@ -55,9 +46,6 @@ class CustomerPaymentRepository extends EntityRepository implements CustomerPaym
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalPaymentsMade(): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -69,9 +57,6 @@ class CustomerPaymentRepository extends EntityRepository implements CustomerPaym
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalPaymentsPending(): int
     {
         return (int) $this->createQueryBuilder('o')

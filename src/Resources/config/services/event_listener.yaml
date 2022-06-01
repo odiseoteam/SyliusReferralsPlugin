@@ -1,0 +1,14 @@
+services:
+    odiseo_sylius_referrals_plugin.event_listener.shop.account_menu:
+        class: Odiseo\SyliusReferralsPlugin\Menu\AccountMenuListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
+
+    odiseo_sylius_referrals_plugin.event_listener.set_session_from_referrals_program_link:
+        class: Odiseo\SyliusReferralsPlugin\EventListener\SetSessionFromReferralsProgramLink
+        arguments:
+            - '@security.token_storage'
+            - '@odiseo_sylius_referrals_plugin.repository.referrals_program'
+            - '@odiseo_sylius_referrals_plugin.repository.referrals_program_view'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: setSession }

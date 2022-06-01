@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Payout;
 
-use Doctrine\ORM\EntityManager;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\CustomerPaymentRepositoryInterface;
@@ -17,38 +16,23 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class CustomerPaymentManager implements CustomerPaymentManagerInterface
 {
-    /** @var CustomerPaymentRepositoryInterface */
-    private $customerPaymentRepository;
-
-    /** @var EntityRepository $referralsProgramRepository */
-    private $referralsProgramRepository;
-
-    /** @var FactoryInterface */
-    private $customerPaymentFactory;
-
-    /** @var EntityManager */
-    private $customerPaymentManager;
-
-    /** @var StateMachineFactoryInterface */
-    private $stateMachineFactory;
+    private CustomerPaymentRepositoryInterface $customerPaymentRepository;
+    private EntityRepository $referralsProgramRepository;
+    private FactoryInterface $customerPaymentFactory;
+    private StateMachineFactoryInterface $stateMachineFactory;
 
     public function __construct(
         CustomerPaymentRepositoryInterface $customerPaymentRepository,
         EntityRepository $referralsProgramRepository,
         FactoryInterface $customerPaymentFactory,
-        EntityManager $customerPaymentManager,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->customerPaymentRepository = $customerPaymentRepository;
         $this->referralsProgramRepository = $referralsProgramRepository;
         $this->customerPaymentFactory = $customerPaymentFactory;
-        $this->customerPaymentManager = $customerPaymentManager;
         $this->stateMachineFactory = $stateMachineFactory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createPayments(OrderInterface $order): void
     {
         $session = new Session();
@@ -81,9 +65,6 @@ final class CustomerPaymentManager implements CustomerPaymentManagerInterface
         $session->remove(ReferralsProgramInterface::TOKEN_PARAM_NAME);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function markPaymentsAsNew(OrderInterface $order): void
     {
         if ($order->getId()) {
@@ -97,19 +78,11 @@ final class CustomerPaymentManager implements CustomerPaymentManagerInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReadyPayments(): array
     {
         return $this->customerPaymentRepository->findNew();
     }
 
-    /**
-     * @param StateMachineInterface $stateMachine
-     * @param string $transition
-     * @throws \SM\SMException
-     */
     private function applyTransition(StateMachineInterface $stateMachine, string $transition): void
     {
         if ($stateMachine->can($transition)) {

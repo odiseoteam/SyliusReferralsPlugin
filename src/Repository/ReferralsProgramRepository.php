@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment;
+use Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-class ReferralsProgramRepository extends EntityRepository implements RepositoryInterface
+class ReferralsProgramRepository extends EntityRepository implements ReferralsProgramRepositoryInterface
 {
     public function createListByCustomerInnerQueryBuilder(CustomerInterface $customer): QueryBuilder
     {
@@ -42,7 +41,7 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
         ;
     }
 
-    public function findReferedPageByCustomer(CustomerInterface $customer): ?ReferralsProgramInterface
+    public function findReferredPageByCustomer(CustomerInterface $customer): ?ReferralsProgramInterface
     {
         return $this->createListByCustomerQueryBuilder($customer)
             ->select('COUNT(view.id) as HIDDEN count, a')
@@ -54,9 +53,9 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
         ;
     }
 
-    public function findMaxProductReferedPageByCustomer(CustomerInterface $customer): ?ProductInterface
+    public function findMaxProductReferredPageByCustomer(CustomerInterface $customer): ?ProductInterface
     {
-        $referralsProgram = $this->findReferedPageByCustomer($customer);
+        $referralsProgram = $this->findReferredPageByCustomer($customer);
         if (null === $referralsProgram || $referralsProgram->getViews()->count() === 0) {
             return null;
         }
@@ -64,9 +63,9 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
         return $referralsProgram->getProduct();
     }
 
-    public function findMaxViewReferedPageByCustomer(CustomerInterface $customer): int
+    public function findMaxViewReferredPageByCustomer(CustomerInterface $customer): int
     {
-        $referralsProgram = $this->findReferedPageByCustomer($customer);
+        $referralsProgram = $this->findReferredPageByCustomer($customer);
         if (null === $referralsProgram) {
             return 0;
         }
@@ -84,8 +83,8 @@ class ReferralsProgramRepository extends EntityRepository implements RepositoryI
             ->andWhere('payment.amount != 0')
             ->andWhere('payment.state IN (:state)')
             ->setParameter('state', [
-                CustomerPayment::STATE_NEW,
-                CustomerPayment::STATE_COMPLETED,
+                CustomerPaymentInterface::STATE_NEW,
+                CustomerPaymentInterface::STATE_COMPLETED,
             ])
             ->getQuery()
             ->getSingleScalarResult()

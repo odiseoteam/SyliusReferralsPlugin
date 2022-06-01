@@ -6,8 +6,8 @@ sylius_ui:
 
         sylius.shop.layout.javascripts:
             blocks:
-                scripts:
-                    template: '@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Product/Index/_scripts.html.twig'
+                referrals_program_scripts:
+                    template: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_scripts.html.twig'
 
         odiseo_sylius_referrals_plugin.shop.referrals_program.index.before_content:
             blocks:
