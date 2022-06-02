@@ -1,4 +1,6 @@
 imports:
+    - { resource: services/assigner.yaml }
     - { resource: services/controller.yaml }
+    - { resource: services/email.yaml }
     - { resource: services/event_listener.yaml }
-    - { resource: services/payout.yaml }
+    - { resource: services/reward.yaml }

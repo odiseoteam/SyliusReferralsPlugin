@@ -1,0 +1,5 @@
+sylius_mailer:
+    emails:
+        reward_create:
+            subject: odiseo_sylius_referrals_plugin.emails.reward_create.subject
+            template: "@OdiseoSyliusReferralsPlugin/Shop/Email/reward_create.html.twig"

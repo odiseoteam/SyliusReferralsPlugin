@@ -9,7 +9,21 @@ sylius_ui:
                 referrals_program_scripts:
                     template: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_scripts.html.twig'
 
-        odiseo_sylius_referrals_plugin.shop.referrals_program.index.before_content:
+        odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.subcontent:
             blocks:
+                header:
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/_header.html.twig"
+                    priority: 20
+                after_content_header_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 15
+                    context:
+                        event: odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.after_content_header
                 statistics:
-                    template: '@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/statistics.html.twig'
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/_statistics.html.twig"
+                    priority: 10
+                after_grid_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 5
+                    context:
+                        event: odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.after_grid

@@ -1,0 +1,7 @@
+services:
+    odiseo_sylius_referrals_plugin.assigner.referrals_program:
+        class: Odiseo\SyliusReferralsPlugin\Assigner\ReferralsProgramAssigner
+        public: true
+        arguments:
+            - '@odiseo_sylius_referrals_plugin.manager.referrals_program'
+            - '@odiseo_sylius_referrals_plugin.repository.referrals_program'

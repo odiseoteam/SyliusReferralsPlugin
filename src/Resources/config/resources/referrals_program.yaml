@@ -5,18 +5,16 @@ sylius_resource:
             classes:
                 model: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram
                 interface: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface
+                form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
                 repository: Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository
-
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                factory: Sylius\Component\Resource\Factory\Factory
         odiseo_sylius_referrals_plugin.referrals_program_view:
             driver: doctrine/orm
             classes:
                 model: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramView
                 interface: Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramViewInterface
+                form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
                 repository: Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository
-
-        odiseo_sylius_referrals_plugin.customer_payment:
-            driver: doctrine/orm
-            classes:
-                model: Odiseo\SyliusReferralsPlugin\Entity\CustomerPayment
-                interface: Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface
-                repository: Odiseo\SyliusReferralsPlugin\Repository\CustomerPaymentRepository
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                factory: Sylius\Component\Resource\Factory\Factory

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Entity;
 
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
  * @ORM\Entity

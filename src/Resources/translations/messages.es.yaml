@@ -1,7 +1,7 @@
 odiseo_sylius_referrals_plugin:
     ui:
         share_link: Compartir enlace
-        referrals_program_stats: Programa de referidos
+        referrals_program: Programa de referidos
         manage_referrals_program: Administrar programa de referidos
         max_views: Vistas máximas
         max_views_description: Producto que más usuarios refirió
@@ -9,3 +9,10 @@ odiseo_sylius_referrals_plugin:
         month_referrals_description: Los usuarios siguieron sus enlaces de referidos
         average: Promedio
         average_description: Referidos que hicieron una compra
+    email:
+        shop:
+            reward_create:
+                subject: ¡Se ha creado un nuevo cupón!
+                the_coupon: El cupón
+                has_been_created: ha sido creado
+                follow_link: Sigue este enlace para ver tu programa

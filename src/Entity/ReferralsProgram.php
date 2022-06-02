@@ -7,7 +7,8 @@ namespace Odiseo\SyliusReferralsPlugin\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
@@ -43,14 +44,21 @@ class ReferralsProgram implements ReferralsProgramInterface
     private $link;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      *
      * @var CustomerInterface|null
      */
     private $customer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Core\Model\Product")
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Order\Model\OrderInterface")
+     *
+     * @var OrderInterface|null
+     */
+    private $order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
      *
      * @var ProductInterface|null
      */
@@ -106,89 +114,66 @@ class ReferralsProgram implements ReferralsProgramInterface
         $this->updatedAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTokenValue(): ?string
     {
         return $this->tokenValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTokenValue(string $tokenValue): void
     {
         $this->tokenValue = $tokenValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLink(): ?string
     {
         return $this->link;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setLink(string $link): void
     {
         $this->link = $link;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCustomer(): ?CustomerInterface
     {
         return $this->customer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getOrder(): ?OrderInterface
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?OrderInterface $order): void
+    {
+        $this->order = $order;
+    }
+
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setProduct(ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getViews(): Collection
     {
         return $this->views;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addView(?ReferralsProgramViewInterface $view): void
     {
         if (!$this->views->contains($view)) {
@@ -199,9 +184,6 @@ class ReferralsProgram implements ReferralsProgramInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeView(?ReferralsProgramViewInterface $view): void
     {
         if ($this->views->contains($view)) {
@@ -212,9 +194,6 @@ class ReferralsProgram implements ReferralsProgramInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addPayment(CustomerPaymentInterface $payment): void
     {
         if (null !== $this->payments) {
@@ -224,9 +203,6 @@ class ReferralsProgram implements ReferralsProgramInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removePayment(CustomerPaymentInterface $payment): void
     {
         if (null !== $this->payments) {
@@ -236,25 +212,16 @@ class ReferralsProgram implements ReferralsProgramInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getExpireAt(): ?\DateTimeInterface
     {
         return $this->expireAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setExpireAt(\DateTimeInterface $expireAt): void
     {
         $this->expireAt = $expireAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isExpired(): bool
     {
         $now = new \DateTime();

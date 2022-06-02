@@ -2,7 +2,7 @@ winzou_state_machine:
     sylius_order:
         callbacks:
             after:
-                odiseo_sylius_referrals_plugin_create_payments_on_customer:
+                odiseo_sylius_referrals_plugin_assign_order_on_program:
                     on: ["create"]
-                    do: ["@odiseo_sylius_referrals_plugin.payout.customer_payment_manager", "createPayments"]
+                    do: ["@odiseo_sylius_referrals_plugin.assigner.referrals_program", "assignOrder"]
                     args: ["object"]

@@ -34,7 +34,13 @@ odiseo_sylius_referrals_plugin_shop:
         _locale: ^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$
 ```
 
-5. Finish the installation updating the database schema and installing assets
+5. Add the environment variables
+
+```
+ODISEO_REFERRALS_PROMOTION_CODE=EDITME
+```
+
+6. Finish the installation updating the database schema and installing assets
 
 ```
 php bin/console doctrine:migrations:migrate

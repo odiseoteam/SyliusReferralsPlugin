@@ -2,7 +2,7 @@ winzou_state_machine:
     sylius_order_payment:
         callbacks:
             after:
-                odiseo_sylius_referrals_plugin_mark_customer_payments_as_new:
+                odiseo_sylius_referrals_plugin_create_reward:
                     on: ["pay"]
-                    do: ["@odiseo_sylius_referrals_plugin.payout.customer_payment_manager", "markPaymentsAsNew"]
+                    do: ["@odiseo_sylius_referrals_plugin.reward.reward_manager", "create"]
                     args: ["object"]

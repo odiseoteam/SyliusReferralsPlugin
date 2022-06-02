@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 class ReferralsProgramViewRepository extends EntityRepository implements ReferralsProgramViewRepositoryInterface
 {

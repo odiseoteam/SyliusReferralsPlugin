@@ -1,0 +1,5 @@
+services:
+    odiseo_sylius_referrals_plugin.email_manager.reward:
+        class: Odiseo\SyliusReferralsPlugin\Mailer\RewardEmailManager
+        arguments:
+            - '@sylius.email_sender'

@@ -1,44 +1,11 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
-{% set event_prefix = metadata.applicationName ~ '.shop.' ~ metadata.name ~ '.index' %}
-
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
-
-{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'odiseo_sylius_referrals_plugin.ui.referrals_program'|trans }} | {{ parent() }}{% endblock %}
 
 {% block breadcrumb %}
-    <div class="pt-breadcrumb">
-        <div class="container-fluid">
-            <ul>
-                <li><a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a></li>
-                <li><a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a></li>
-                <li><div class="active section">{{ header|trans }}</div></li>
-            </ul>
-        </div>
-    </div>
+    {% include '@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/_breadcrumb.html.twig' %}
 {% endblock %}
 
 {% block subcontent %}
-    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resources': resources}) }}
-
-    <h1 class="ui header">
-        {{ header|trans }}
-        <div class="sub header">{{ configuration.vars.subheader|default('')|trans }}</div>
-    </h1>
-{#
-    <div class="col text-right">
-        <a href="{{ path('bitbag_sylius_cms_plugin_shop_page_show', { 'slug': 'become-affiliate' }) }}" class="btn btn-primary">{{ 'app.ui.become_an_affiliate'|trans }}</a>
-    </div>
-#}
-
-    {{ sylius_template_event([event_prefix ~ '.header', 'sylius.shop.index.header'], _context) }}
-
-    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resources': resources}) }}
-
-    {{ sylius_template_event(event_prefix ~ '.before_content', {'resources': resources}) }}
-
-    {#{{ sylius_grid_render(resources, '@SyliusShop/Grid/_default.html.twig') }}#}
-
-    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resources': resources}) }}
-
+    {{ sylius_template_event('odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.subcontent', _context) }}
 {% endblock %}

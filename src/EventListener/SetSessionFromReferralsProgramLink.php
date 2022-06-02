@@ -8,7 +8,7 @@ use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramView;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepository;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepository;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

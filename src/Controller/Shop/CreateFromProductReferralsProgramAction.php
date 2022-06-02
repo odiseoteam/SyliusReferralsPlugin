@@ -6,6 +6,7 @@ namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepositoryInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -41,6 +42,7 @@ final class CreateFromProductReferralsProgramAction
 
     public function __invoke(Request $request): Response
     {
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerContext->getCustomer();
         if (null === $customer) {
             throw new HttpException(Response::HTTP_UNAUTHORIZED);

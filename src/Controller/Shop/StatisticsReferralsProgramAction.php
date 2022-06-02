@@ -6,8 +6,8 @@ namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepositoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramViewRepositoryInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -34,6 +34,7 @@ final class StatisticsReferralsProgramAction
 
     public function __invoke(Request $request): Response
     {
+        /** @var CustomerInterface|null $customer */
         $customer = $this->customerContext->getCustomer();
         if (null === $customer) {
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
@@ -64,7 +65,7 @@ final class StatisticsReferralsProgramAction
     private function averageByCustomer(CustomerInterface $customer): int
     {
         $sum = $this->referralsProgramViewRepository->findViewsByCustomer($customer);
-        $count = $this->referralsProgramRepository->findCountPaymentsByCustomer($customer);
+        $count = $this->referralsProgramRepository->findCountSalesByCustomer($customer);
 
         if ($count == 0 || $sum == 0) {
             return 0;

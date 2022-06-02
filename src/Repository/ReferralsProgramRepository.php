@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Odiseo\SyliusReferralsPlugin\Entity\CustomerPaymentInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -73,19 +72,13 @@ class ReferralsProgramRepository extends EntityRepository implements ReferralsPr
         return $referralsProgram->getViews()->count();
     }
 
-    public function findCountPaymentsByCustomer(CustomerInterface $customer): int
+    public function findCountSalesByCustomer(CustomerInterface $customer): int
     {
         return (int) $this->createQueryBuilder('a')
-            ->select('COUNT(payment)')
+            ->select('COUNT(a.id)')
             ->where('a.customer = :customer')
             ->setParameter('customer', $customer)
-            ->innerJoin('a.payments', 'payment')
-            ->andWhere('payment.amount != 0')
-            ->andWhere('payment.state IN (:state)')
-            ->setParameter('state', [
-                CustomerPaymentInterface::STATE_NEW,
-                CustomerPaymentInterface::STATE_COMPLETED,
-            ])
+            ->andWhere('a.order IS NOT NULL')
             ->getQuery()
             ->getSingleScalarResult()
         ;

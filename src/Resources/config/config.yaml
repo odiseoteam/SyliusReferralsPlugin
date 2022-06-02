@@ -1,4 +1,5 @@
 imports:
+    - { resource: mailer.yaml }
     - { resource: resources.yaml }
     - { resource: state_machine.yaml }
     - { resource: sylius_ui.yaml }
