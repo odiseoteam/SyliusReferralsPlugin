@@ -1,0 +1,13 @@
+services:
+    odiseo_sylius_referrals_plugin.context.ui.shop.product:
+        class: Tests\Odiseo\SyliusReferralsPlugin\Behat\Context\Ui\Shop\ProductContext
+        public: true
+        arguments:
+            - '@sylius.behat.page.shop.product.show'
+            - '@sylius.behat.page.shop.product.index'
+            - '@sylius.behat.page.shop.product_reviews.index'
+            - '@sylius.behat.page.error'
+            - '@sylius.behat.element.product.index.vertical_menu'
+            - '@sylius.behat.channel_context_setter'
+        tags:
+            - { name: fob.context_service }

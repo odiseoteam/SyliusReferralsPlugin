@@ -7,6 +7,8 @@ namespace Odiseo\SyliusReferralsPlugin\Reward;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Mailer\RewardEmailManagerInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -68,8 +70,11 @@ final class RewardManager implements RewardManagerInterface
 
         $this->promotionCouponRepository->add($coupon);
 
+        /** @var CustomerInterface $customer */
         $customer = $referralsProgram->getCustomer();
+        /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
+        /** @var string $localeCode */
         $localeCode = $order->getLocaleCode();
 
         $this->rewardEmailManager->sendEmail(

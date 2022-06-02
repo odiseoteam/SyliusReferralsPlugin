@@ -7,6 +7,7 @@ namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -50,6 +51,7 @@ final class CreateFromProductReferralsProgramAction
 
         $productId = $request->attributes->get('id');
 
+        /** @var ProductInterface|null $product */
         $product = $this->productRepository->find($productId);
         if (null === $product) {
             throw new NotFoundHttpException();
@@ -76,6 +78,7 @@ final class CreateFromProductReferralsProgramAction
     {
         $referralsProgram->setTokenValue($this->generateTokenValue());
 
+        /** @var ProductInterface $product */
         $product = $referralsProgram->getProduct();
 
         $link = $this->router->generate(
