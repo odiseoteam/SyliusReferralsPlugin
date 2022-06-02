@@ -64,6 +64,7 @@ final class RewardManager implements RewardManagerInterface
         $coupon = $this->promotionCouponFactory->createForPromotion($promotion);
         $coupon->setCode($order->getNumber());
         $coupon->setUsageLimit(1);
+        $coupon->setPerCustomerUsageLimit(1);
 
         $this->promotionCouponRepository->add($coupon);
 

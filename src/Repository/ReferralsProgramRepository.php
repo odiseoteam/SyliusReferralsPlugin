@@ -9,6 +9,7 @@ use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\OrderPaymentStates;
 
 class ReferralsProgramRepository extends EntityRepository implements ReferralsProgramRepositoryInterface
 {
@@ -76,9 +77,11 @@ class ReferralsProgramRepository extends EntityRepository implements ReferralsPr
     {
         return (int) $this->createQueryBuilder('a')
             ->select('COUNT(a.id)')
+            ->innerJoin('a.order', 'o')
             ->where('a.customer = :customer')
             ->setParameter('customer', $customer)
-            ->andWhere('a.order IS NOT NULL')
+            ->andWhere('o.paymentState = :paymentState')
+            ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
             ->getQuery()
             ->getSingleScalarResult()
         ;

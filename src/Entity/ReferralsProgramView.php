@@ -4,129 +4,55 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="odiseo_referrals_program_view")
- */
 class ReferralsProgramView implements ReferralsProgramViewInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     *
-     * @var int|null
-     */
-    protected $id;
+    use TimestampableTrait;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgram", inversedBy="views")
-     * @ORM\JoinColumn(name="referrals_program_id", nullable=false)
-     *
-     * @var ReferralsProgramInterface|null
-     */
-    private $referralsProgram;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\Customer", cascade={"persist", "remove"})
-     *
-     * @var CustomerInterface|null
-     */
-    private $customer;
-
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string|null
-     */
-    private $ip;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     *
-     * @var \DateTimeInterface
-     */
-    protected $createdAt;
+    protected ?int $id = null;
+    protected ?string $ip = null;
+    protected ?CustomerInterface $customer = null;
+    protected ?ReferralsProgramInterface $referralsProgram = null;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setReferralsProgram(?ReferralsProgramInterface $referralsProgram): void
-    {
-        $this->referralsProgram = $referralsProgram;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getReferralsProgram(): ?ReferralsProgramInterface
-    {
-        return $this->referralsProgram;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCustomer(?CustomerInterface $customer): void
-    {
-        $this->customer = $customer;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCustomer(): ?CustomerInterface
-    {
-        return $this->customer;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setIp(?string $ip): void
-    {
-        $this->ip = $ip;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getIp(): ?string
     {
         return $this->ip;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTimeInterface $createdAt): void
+    public function setIp(?string $ip): void
     {
-        $this->createdAt = $createdAt;
+        $this->ip = $ip;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCustomer(): ?CustomerInterface
     {
-        return $this->createdAt;
+        return $this->customer;
+    }
+
+    public function setCustomer(?CustomerInterface $customer): void
+    {
+        $this->customer = $customer;
+    }
+
+    public function getReferralsProgram(): ?ReferralsProgramInterface
+    {
+        return $this->referralsProgram;
+    }
+
+    public function setReferralsProgram(?ReferralsProgramInterface $referralsProgram): void
+    {
+        $this->referralsProgram = $referralsProgram;
     }
 }
