@@ -45,6 +45,11 @@ You can see this plugin in action in our Sylius Demo application.
 - [Installation](doc/installation.md)
 - [Tests](doc/tests.md)
 
+## Screenshots
+
+<img src="https://github.com/odiseoteam/SyliusReferralsPlugin/blob/master/screenshot_1.png" alt="Share link button" width="650">
+<img src="https://github.com/odiseoteam/SyliusReferralsPlugin/blob/master/screenshot_2.png" alt="Referrals program account info" width="650">
+
 ## Credits
 
 This plugin is maintained by <a href="https://odiseo.io">Odiseo</a>. Want us to help you with this plugin or any Sylius project? Contact us on <a href="mailto:team@odiseo.com.ar">team@odiseo.com.ar</a>.
