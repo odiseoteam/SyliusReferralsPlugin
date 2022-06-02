@@ -1,6 +1,7 @@
 odiseo_sylius_referrals_plugin:
     ui:
         share_link: Share link
+        you_must_be_identified_to_share_link: You must be identified to share the link
         referrals_program: Referrals program
         manage_referrals_program: Manage referrals program
         max_views: Max views

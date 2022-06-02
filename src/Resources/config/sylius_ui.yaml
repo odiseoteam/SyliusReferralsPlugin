@@ -4,11 +4,6 @@ sylius_ui:
             blocks:
                 referrals_program: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_referrals_program.html.twig'
 
-        sylius.shop.layout.javascripts:
-            blocks:
-                referrals_program_scripts:
-                    template: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_scripts.html.twig'
-
         odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.subcontent:
             blocks:
                 header:
