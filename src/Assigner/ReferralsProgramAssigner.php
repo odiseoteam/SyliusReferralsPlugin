@@ -17,7 +17,7 @@ final class ReferralsProgramAssigner implements ReferralsProgramAssignerInterfac
 
     public function __construct(
         ObjectManager $referralsProgramManager,
-        ReferralsProgramRepositoryInterface $referralsProgramRepository,
+        ReferralsProgramRepositoryInterface $referralsProgramRepository
     ) {
         $this->referralsProgramManager = $referralsProgramManager;
         $this->referralsProgramRepository = $referralsProgramRepository;
