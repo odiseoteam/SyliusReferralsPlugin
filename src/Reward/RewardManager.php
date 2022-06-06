@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Reward;
 
-use Odiseo\SyliusReferralsPlugin\Entity\ReferralsProgramInterface;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateAwareInterface;
 use Odiseo\SyliusReferralsPlugin\Mailer\RewardEmailManagerInterface;
-use Odiseo\SyliusReferralsPlugin\Repository\ReferralsProgramRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -22,7 +21,6 @@ final class RewardManager implements RewardManagerInterface
     private PromotionRepositoryInterface $promotionRepository;
     private PromotionCouponFactoryInterface $promotionCouponFactory;
     private PromotionCouponRepositoryInterface $promotionCouponRepository;
-    private ReferralsProgramRepositoryInterface $referralsProgramRepository;
     private RewardEmailManagerInterface $rewardEmailManager;
     private string $promotionCode;
 
@@ -30,26 +28,23 @@ final class RewardManager implements RewardManagerInterface
         PromotionRepositoryInterface $promotionRepository,
         PromotionCouponFactoryInterface $promotionCouponFactory,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
-        ReferralsProgramRepositoryInterface $referralsProgramRepository,
         RewardEmailManagerInterface $rewardEmailManager,
         string $promotionCode
     ) {
         $this->promotionRepository = $promotionRepository;
         $this->promotionCouponFactory = $promotionCouponFactory;
         $this->promotionCouponRepository = $promotionCouponRepository;
-        $this->referralsProgramRepository = $referralsProgramRepository;
         $this->rewardEmailManager = $rewardEmailManager;
         $this->promotionCode = $promotionCode;
     }
 
     public function create(OrderInterface $order): void
     {
-        /** @var ReferralsProgramInterface|null $referralsProgram */
-        $referralsProgram = $this->referralsProgramRepository->findOneBy([
-            'order' => $order
-        ]);
+        if (!$order instanceof AffiliateAwareInterface) {
+            return;
+        }
 
-        if (null === $referralsProgram) {
+        if (null === $affiliate = $order->getAffiliate()) {
             return;
         }
 
@@ -71,7 +66,7 @@ final class RewardManager implements RewardManagerInterface
         $this->promotionCouponRepository->add($coupon);
 
         /** @var CustomerInterface $customer */
-        $customer = $referralsProgram->getCustomer();
+        $customer = $affiliate->getCustomer();
         /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
         /** @var string $localeCode */

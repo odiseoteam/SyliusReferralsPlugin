@@ -15,3 +15,10 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: Tests\Odiseo\SyliusReferralsPlugin\Application\Entity\Order
+                repository: Tests\Odiseo\SyliusReferralsPlugin\Application\Repository\OrderRepository

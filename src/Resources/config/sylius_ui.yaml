@@ -2,23 +2,23 @@ sylius_ui:
     events:
         sylius.shop.product.show.right_sidebar:
             blocks:
-                referrals_program: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_referrals_program.html.twig'
+                affiliate: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_affiliate.html.twig'
 
-        odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.subcontent:
+        odiseo_sylius_referrals_plugin.shop.account.affiliate.index.subcontent:
             blocks:
                 header:
-                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/_header.html.twig"
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_header.html.twig"
                     priority: 20
                 after_content_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 15
                     context:
-                        event: odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.after_content_header
+                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate.index.after_content_header
                 statistics:
-                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/ReferralsProgram/Index/_statistics.html.twig"
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_statistics.html.twig"
                     priority: 10
                 after_grid_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        event: odiseo_sylius_referrals_plugin.shop.account.referrals_program.index.after_grid
+                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate.index.after_grid

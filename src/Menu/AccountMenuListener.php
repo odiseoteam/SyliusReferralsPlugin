@@ -13,10 +13,10 @@ final class AccountMenuListener
         $menu = $event->getMenu();
 
         $menu
-            ->addChild('referrals_program', [
-                'route' => 'odiseo_sylius_referrals_plugin_shop_account_referrals_program_index'
+            ->addChild('affiliates', [
+                'route' => 'odiseo_sylius_referrals_plugin_shop_account_affiliate_index'
             ])
-            ->setLabel('odiseo_sylius_referrals_plugin.ui.referrals_program')
+            ->setLabel('odiseo_sylius_referrals_plugin.ui.affiliates')
             ->setLabelAttribute('icon', 'share')
         ;
     }

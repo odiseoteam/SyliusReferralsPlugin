@@ -1,19 +1,20 @@
 services:
-    odiseo_sylius_referrals_plugin.controller.shop.statistics_referrals_program:
-        class: Odiseo\SyliusReferralsPlugin\Controller\Shop\StatisticsReferralsProgramAction
+    odiseo_sylius_referrals_plugin.controller.shop.statistics_affiliate:
+        class: Odiseo\SyliusReferralsPlugin\Controller\Shop\StatisticsAffiliateAction
         public: true
         arguments:
             - '@sylius.context.customer'
-            - '@odiseo_sylius_referrals_plugin.repository.referrals_program'
-            - '@odiseo_sylius_referrals_plugin.repository.referrals_program_view'
+            - '@sylius.repository.order'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate_view'
             - '@twig'
 
-    odiseo_sylius_referrals_plugin.controller.shop.create_from_product_referrals_program:
-        class: Odiseo\SyliusReferralsPlugin\Controller\Shop\CreateFromProductReferralsProgramAction
+    odiseo_sylius_referrals_plugin.controller.shop.create_from_product_affiliate:
+        class: Odiseo\SyliusReferralsPlugin\Controller\Shop\CreateFromProductAffiliateAction
         public: true
         arguments:
             - '@sylius.context.customer'
             - '@sylius.repository.product'
-            - '@odiseo_sylius_referrals_plugin.factory.referrals_program'
-            - '@odiseo_sylius_referrals_plugin.repository.referrals_program'
+            - '@odiseo_sylius_referrals_plugin.factory.affiliate'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
             - '@router'

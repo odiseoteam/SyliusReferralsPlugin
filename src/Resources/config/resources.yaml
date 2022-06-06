@@ -1,2 +1,2 @@
 imports:
-    - { resource: resources/referrals_program.yaml }
+    - { resource: resources/affiliate.yaml }

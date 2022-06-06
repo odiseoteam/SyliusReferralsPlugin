@@ -2,8 +2,8 @@ odiseo_sylius_referrals_plugin:
     ui:
         share_link: Compartir enlace
         you_must_be_identified_to_share_link: Debes estar identificado para compartir el enlace
-        referrals_program: Programa de referidos
-        manage_referrals_program: Administrar programa de referidos
+        affiliates: Afiliados
+        manage_affiliates: Administrar afiliados
         max_views: Vistas máximas
         max_views_description: Producto que más usuarios refirió
         month_referrals: Referidos del mes
