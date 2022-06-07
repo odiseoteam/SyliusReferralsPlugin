@@ -12,7 +12,7 @@ odiseo_sylius_referrals_plugin:
         average_description: Referidos que hicieron una compra
     email:
         shop:
-            reward_create:
+            promotion_reward:
                 subject: ¡Se ha creado un nuevo cupón!
                 the_coupon: El cupón
                 has_been_created: ha sido creado

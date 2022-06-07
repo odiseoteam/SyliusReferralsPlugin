@@ -3,8 +3,21 @@ services:
         class: Odiseo\SyliusReferralsPlugin\Reward\RewardManager
         public: true
         arguments:
+            - '@odiseo_sylius_referrals_plugin.reward.reward_handler'
+
+    odiseo_sylius_referrals_plugin.reward.reward_handler:
+        class: Odiseo\SyliusReferralsPlugin\Reward\RewardHandler
+        arguments:
+            - !tagged { tag: 'odiseo_sylius_referrals_plugin.reward.reward_handler', index_by: 'key' }
+
+    odiseo_sylius_referrals_plugin.reward.handler.promotion:
+        class: Odiseo\SyliusReferralsPlugin\Reward\Handler\PromotionReward
+        lazy: true
+        arguments:
             - '@sylius.repository.promotion'
             - '@sylius.factory.promotion_coupon'
             - '@sylius.repository.promotion_coupon'
             - '@odiseo_sylius_referrals_plugin.email_manager.reward'
             - '%env(resolve:ODISEO_REFERRALS_PROMOTION_CODE)%'
+        tags:
+            - { name: 'odiseo_sylius_referrals_plugin.reward.reward_handler', key: 'promotion' }

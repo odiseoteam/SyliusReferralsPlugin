@@ -16,9 +16,15 @@ interface AffiliateInterface extends
 {
     public const TOKEN_PARAM_NAME = 'token_value';
 
+    public const TYPE_PROMOTION = 'promotion';
+
     public function getTokenValue(): ?string;
 
     public function setTokenValue(?string $tokenValue): void;
+
+    public function getType(): ?string;
+
+    public function setType(?string $type): void;
 
     public function getExpiresAt(): ?\DateTimeInterface;
 

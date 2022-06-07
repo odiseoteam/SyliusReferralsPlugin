@@ -10,7 +10,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 
 interface RewardEmailManagerInterface
 {
-    public function sendEmail(
+    public function sendPromotionEmail(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
         ChannelInterface $channel,

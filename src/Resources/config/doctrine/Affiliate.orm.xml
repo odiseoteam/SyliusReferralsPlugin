@@ -12,6 +12,7 @@
         </id>
 
         <field name="tokenValue" type="string" column="token_value" unique="true"/>
+        <field name="type" type="string"/>
         <field name="expiresAt" type="datetime" column="expires_at"/>
         <field name="createdAt" type="datetime" column="created_at">
             <gedmo:timestampable on="create"/>

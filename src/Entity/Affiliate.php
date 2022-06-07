@@ -16,6 +16,7 @@ class Affiliate implements AffiliateInterface
 
     protected ?int $id = null;
     protected ?string $tokenValue = null;
+    protected ?string $type = null;
     protected ?\DateTimeInterface $expiresAt = null;
     protected ?CustomerInterface $customer = null;
     protected ?ProductInterface $product = null;
@@ -47,6 +48,16 @@ class Affiliate implements AffiliateInterface
     public function setTokenValue(?string $tokenValue): void
     {
         $this->tokenValue = $tokenValue;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 
     public function getExpiresAt(): ?\DateTimeInterface

@@ -6,5 +6,5 @@ namespace Odiseo\SyliusReferralsPlugin\Mailer;
 
 final class Emails
 {
-    public const REWARD_CREATE = 'reward_create';
+    public const PROMOTION_REWARD = 'promotion_reward';
 }

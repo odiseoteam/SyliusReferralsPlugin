@@ -19,14 +19,14 @@ final class RewardEmailManager implements RewardEmailManagerInterface
         $this->emailSender = $emailSender;
     }
 
-    public function sendEmail(
+    public function sendPromotionEmail(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
         ChannelInterface $channel,
         string $localeCode
     ): void {
         $this->emailSender->send(
-            Emails::REWARD_CREATE,
+            Emails::PROMOTION_REWARD,
             [$customer->getEmail()],
             [
                 'customer' => $customer,
