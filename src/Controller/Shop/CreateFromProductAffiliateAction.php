@@ -59,7 +59,7 @@ final class CreateFromProductAffiliateAction
 
         /** @var AffiliateInterface $affiliate */
         $affiliate = $this->affiliateFactory->createNew();
-        $affiliate->setType(AffiliateInterface::TYPE_PROMOTION);
+        $affiliate->setType(AffiliateInterface::REWARD_TYPE_PROMOTION);
         $affiliate->setCustomer($customer);
         $affiliate->setProduct($product);
 

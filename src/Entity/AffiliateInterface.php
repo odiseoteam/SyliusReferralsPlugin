@@ -16,7 +16,7 @@ interface AffiliateInterface extends
 {
     public const TOKEN_PARAM_NAME = 'token_value';
 
-    public const TYPE_PROMOTION = 'promotion';
+    public const REWARD_TYPE_PROMOTION = 'promotion';
 
     public function getTokenValue(): ?string;
 
