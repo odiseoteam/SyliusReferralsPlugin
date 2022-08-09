@@ -9,6 +9,16 @@ services:
             - '@odiseo_sylius_referrals_plugin.repository.affiliate_view'
             - '@twig'
 
+    odiseo_sylius_referrals_plugin.controller.shop.create_from_user_affiliate:
+        class: Odiseo\SyliusReferralsPlugin\Controller\Shop\CreateFromUserAffiliateAction
+        public: true
+        arguments:
+            - '@sylius.context.customer'
+            - '@odiseo_sylius_referrals_plugin.factory.affiliate'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
+            - '@router'
+            - '@twig'
+
     odiseo_sylius_referrals_plugin.controller.shop.create_from_product_affiliate:
         class: Odiseo\SyliusReferralsPlugin\Controller\Shop\CreateFromProductAffiliateAction
         public: true

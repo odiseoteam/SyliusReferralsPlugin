@@ -16,6 +16,10 @@ interface AffiliateRepositoryInterface extends RepositoryInterface
 
     public function createListByCustomerQueryBuilder(CustomerInterface $customer): QueryBuilder;
 
+    public function findOneByCustomerNotExpired(CustomerInterface $customer): ?AffiliateInterface;
+
+    public function findOneByCustomerAndProductNotExpired(CustomerInterface $customer, ProductInterface $product): ?AffiliateInterface;
+
     public function findSumViewsByCustomer(CustomerInterface $customer): ?int;
 
     public function findReferredPageByCustomer(CustomerInterface $customer): ?AffiliateInterface;

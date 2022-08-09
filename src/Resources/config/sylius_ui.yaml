@@ -8,12 +8,15 @@ sylius_ui:
             blocks:
                 header:
                     template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_header.html.twig"
-                    priority: 20
+                    priority: 25
                 after_content_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
-                    priority: 15
+                    priority: 20
                     context:
                         event: odiseo_sylius_referrals_plugin.shop.account.affiliate.index.after_content_header
+                link:
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_link.html.twig"
+                    priority: 15
                 statistics:
                     template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_statistics.html.twig"
                     priority: 10
