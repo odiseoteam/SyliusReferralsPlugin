@@ -10,5 +10,5 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface AffiliateGeneratorInterface
 {
-    public function generate(CustomerInterface $customer, ?ProductInterface $product): AffiliateInterface;
+    public function generate(CustomerInterface $customer, ?ProductInterface $product = null): AffiliateInterface;
 }

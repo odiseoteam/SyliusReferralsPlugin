@@ -18,7 +18,10 @@ interface AffiliateRepositoryInterface extends RepositoryInterface
 
     public function findOneByCustomerNotExpired(CustomerInterface $customer): ?AffiliateInterface;
 
-    public function findOneByCustomerAndProductNotExpired(CustomerInterface $customer, ProductInterface $product): ?AffiliateInterface;
+    public function findOneByCustomerAndProductNotExpired(
+        CustomerInterface $customer,
+        ProductInterface $product
+    ): ?AffiliateInterface;
 
     public function findSumViewsByCustomer(CustomerInterface $customer): ?int;
 
