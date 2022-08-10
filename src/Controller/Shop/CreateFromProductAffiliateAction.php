@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
+use Odiseo\SyliusReferralsPlugin\Generator\AffiliateGeneratorInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,20 +23,20 @@ final class CreateFromProductAffiliateAction
 {
     private CustomerContextInterface $customerContext;
     private ProductRepositoryInterface $productRepository;
-    private FactoryInterface $affiliateFactory;
+    private AffiliateGeneratorInterface $affiliateGenerator;
     private AffiliateRepositoryInterface $affiliateRepository;
     private RouterInterface $router;
 
     public function __construct(
         CustomerContextInterface $customerContext,
         ProductRepositoryInterface $productRepository,
-        FactoryInterface $affiliateFactory,
+        AffiliateGeneratorInterface $affiliateGenerator,
         AffiliateRepositoryInterface $affiliateRepository,
         RouterInterface $router
     ) {
         $this->customerContext = $customerContext;
         $this->productRepository = $productRepository;
-        $this->affiliateFactory = $affiliateFactory;
+        $this->affiliateGenerator = $affiliateGenerator;
         $this->affiliateRepository = $affiliateRepository;
         $this->router = $router;
     }
@@ -59,15 +59,7 @@ final class CreateFromProductAffiliateAction
 
         $affiliate = $this->affiliateRepository->findOneByCustomerAndProductNotExpired($customer, $product);
         if ($affiliate === null) {
-            /** @var AffiliateInterface $affiliate */
-            $affiliate = $this->affiliateFactory->createNew();
-            $affiliate->setType(AffiliateInterface::REWARD_TYPE_PROMOTION);
-            $affiliate->setCustomer($customer);
-            $affiliate->setProduct($product);
-            $affiliate->setTokenValue($this->generateTokenValue());
-            $affiliate->setExpiresAt(new \DateTime('+15 day'));
-
-            $this->affiliateRepository->add($affiliate);
+            $affiliate = $this->affiliateGenerator->generate($customer, $product);
         }
 
         $link = $this->generateLink($affiliate);
@@ -93,10 +85,5 @@ final class CreateFromProductAffiliateAction
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-    }
-
-    private function generateTokenValue(): string
-    {
-        return uniqid('ap_', true);
     }
 }

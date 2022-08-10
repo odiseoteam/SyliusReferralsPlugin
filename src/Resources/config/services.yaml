@@ -3,4 +3,6 @@ imports:
     - { resource: services/controller.yaml }
     - { resource: services/email.yaml }
     - { resource: services/event_listener.yaml }
+    - { resource: services/factory.yaml }
+    - { resource: services/generator.yaml }
     - { resource: services/reward.yaml }

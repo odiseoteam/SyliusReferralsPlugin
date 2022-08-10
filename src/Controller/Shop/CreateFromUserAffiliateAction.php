@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
+use Odiseo\SyliusReferralsPlugin\Generator\AffiliateGeneratorInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -19,20 +19,20 @@ use Twig\Environment;
 final class CreateFromUserAffiliateAction
 {
     private CustomerContextInterface $customerContext;
-    private FactoryInterface $affiliateFactory;
+    private AffiliateGeneratorInterface $affiliateGenerator;
     private AffiliateRepositoryInterface $affiliateRepository;
     private RouterInterface $router;
     private Environment $twig;
 
     public function __construct(
         CustomerContextInterface $customerContext,
-        FactoryInterface $affiliateFactory,
+        AffiliateGeneratorInterface $affiliateGenerator,
         AffiliateRepositoryInterface $affiliateRepository,
         RouterInterface $router,
         Environment $twig
     ) {
         $this->customerContext = $customerContext;
-        $this->affiliateFactory = $affiliateFactory;
+        $this->affiliateGenerator = $affiliateGenerator;
         $this->affiliateRepository = $affiliateRepository;
         $this->router = $router;
         $this->twig = $twig;
@@ -48,13 +48,7 @@ final class CreateFromUserAffiliateAction
 
         $affiliate = $this->affiliateRepository->findOneByCustomerNotExpired($customer);
         if ($affiliate === null) {
-            /** @var AffiliateInterface $affiliate */
-            $affiliate = $this->affiliateFactory->createNew();
-            $affiliate->setType(AffiliateInterface::REWARD_TYPE_PROMOTION);
-            $affiliate->setCustomer($customer);
-            $affiliate->setTokenValue($this->generateTokenValue());
-
-            $this->affiliateRepository->add($affiliate);
+            $affiliate = $this->affiliateGenerator->generate($customer);
         }
 
         $link = $this->generateLink($affiliate);
@@ -80,10 +74,5 @@ final class CreateFromUserAffiliateAction
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
-    }
-
-    private function generateTokenValue(): string
-    {
-        return uniqid('ap_', true);
     }
 }
