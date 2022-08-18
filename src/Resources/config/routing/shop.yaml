@@ -4,4 +4,4 @@ odiseo_sylius_referrals_plugin_shop_account:
 
 odiseo_sylius_referrals_plugin_shop_partial:
     resource: shop/partial.yaml
-    prefix: /_partial
+    prefix: /partial
