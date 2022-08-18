@@ -1,7 +1,10 @@
 odiseo_sylius_referrals_plugin:
     ui:
         share_link: Share link
-        you_must_be_identified_to_share_link: You must be identified to share the link
+        you_must_be_identified_to_share_link: |
+            Affiliate program: <a href="%url%">Sign in</a> to create your unique url to be shared and win rewards for each purchase
+        you_are_identified_to_share_link: |
+            Affiliate program: Click in the next button to copy your unique url to be shared and win rewards for each purchase
         affiliates: Affiliates
         manage_affiliates: Manage affiliates
         max_views: Max views

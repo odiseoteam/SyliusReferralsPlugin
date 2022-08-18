@@ -1,16 +1,23 @@
-{% if app.user %}
-    <button
-        class="ui secondary icon labeled button"
-        type="button"
-        data-share-link-btn
-        data-href="{{ path('odiseo_sylius_referrals_plugin_shop_partial_affiliate_create_from_product', { 'id': product.id }) }}"
-        data-csrf="{{ csrf_token('affiliate_' ~ product.slug) }}">
-        <i class="alternate share icon"></i>
-        {{ 'odiseo_sylius_referrals_plugin.ui.share_link'|trans }}
-    </button>
-{% else %}
-    <p><a href="{{ path('sylius_shop_login') }}">{{ 'odiseo_sylius_referrals_plugin.ui.you_must_be_identified_to_share_link'|trans }}</a></p>
-{% endif %}
+<div class="ui segment">
+    {% if app.user %}
+        <p>{{ 'odiseo_sylius_referrals_plugin.ui.you_are_identified_to_share_link'|trans|raw }}</p>
+        <button
+            class="ui secondary icon labeled button"
+            type="button"
+            data-share-link-btn
+            data-href="{{ path('odiseo_sylius_referrals_plugin_shop_partial_affiliate_create_from_product', { 'id': product.id }) }}"
+            data-csrf="{{ csrf_token('affiliate_' ~ product.slug) }}">
+            <i class="alternate share icon"></i>
+            {{ 'odiseo_sylius_referrals_plugin.ui.share_link'|trans }}
+        </button>
+    {% else %}
+        <p>
+            {{ 'odiseo_sylius_referrals_plugin.ui.you_must_be_identified_to_share_link'|trans({
+                '%url%': path('sylius_shop_login')
+            })|raw }}
+        </p>
+    {% endif %}
+</div>
 
 <script type="text/javascript">
     if (document.querySelectorAll('[data-share-link-btn]')) {
