@@ -29,9 +29,17 @@
 
 ## Description
 
-This is a Sylius Plugin that adds affiliate program to your store.
+This Sylius Plugin helps you to reach new customers, grow your business, and build customer loyalty through a referrals program.
 
-Support Sylius version 1.10+.
+**Reward customers for referrals**
+
+Turn your customers into influencers, reward them when they refer a friend, and find new customers organically.
+
+**Rewards and incentives model**
+
+This plugin comes with a rewards mechanism to allow you to manage the rewards for your affiliates.
+
+**Support Sylius version 1.10+.**
 
 ## Demo
 
