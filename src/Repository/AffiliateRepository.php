@@ -32,6 +32,36 @@ class AffiliateRepository extends EntityRepository implements AffiliateRepositor
         ;
     }
 
+    public function findOneByCustomerNotExpired(CustomerInterface $customer): ?AffiliateInterface
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.customer = :customer')
+            ->andWhere('a.product IS NULL')
+            ->andWhere('a.expiresAt IS NULL')
+            ->setParameter('customer', $customer)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByCustomerAndProductNotExpired(
+        CustomerInterface $customer,
+        ProductInterface $product
+    ): ?AffiliateInterface {
+        return $this->createQueryBuilder('a')
+            ->where('a.customer = :customer')
+            ->andWhere('a.product = :product')
+            ->andWhere('a.expiresAt > :now')
+            ->setParameter('product', $product)
+            ->setParameter('customer', $customer)
+            ->setParameter('now', new \DateTime())
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     public function findSumViewsByCustomer(CustomerInterface $customer): ?int
     {
         return $this->createListByCustomerQueryBuilder($customer)

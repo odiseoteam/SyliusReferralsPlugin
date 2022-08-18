@@ -28,9 +28,6 @@ class Affiliate implements AffiliateInterface
 
     public function __construct()
     {
-        $this->expiresAt = new \DateTime();
-        $this->expiresAt->modify('+15 day');
-
         $this->views = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
@@ -72,6 +69,10 @@ class Affiliate implements AffiliateInterface
 
     public function isExpired(): bool
     {
+        if ($this->expiresAt === null) {
+            return false;
+        }
+
         $now = new \DateTime();
 
         return $now > $this->expiresAt;

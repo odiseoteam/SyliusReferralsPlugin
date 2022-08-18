@@ -1,0 +1,6 @@
+services:
+    odiseo_sylius_referrals_plugin.custom_factory.affiliate:
+        class: Odiseo\SyliusReferralsPlugin\Factory\AffiliateFactory
+        decorates: odiseo_sylius_referrals_plugin.factory.affiliate
+        arguments:
+            - '@odiseo_sylius_referrals_plugin.custom_factory.affiliate.inner'

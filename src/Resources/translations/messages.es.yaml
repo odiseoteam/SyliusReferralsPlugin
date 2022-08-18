@@ -1,5 +1,7 @@
 odiseo_sylius_referrals_plugin:
     ui:
+        referral_url: URL para referir
+        copy_this_referral_link: Copie este enlace de referido y compártalo
         share_link: Compartir enlace
         you_must_be_identified_to_share_link: |
             Programa de afiliados: <a href="%url%">Iniciar sesión</a> para crear su URL única para compartir y ganar recompensas por cada compra
