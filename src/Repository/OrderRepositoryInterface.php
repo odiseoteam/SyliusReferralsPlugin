@@ -9,5 +9,5 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface as BaseOrderReposi
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
-    public function findCountAffiliateSalesByCustomer(CustomerInterface $customer): int;
+    public function countSalesByCustomer(CustomerInterface $customer): int;
 }

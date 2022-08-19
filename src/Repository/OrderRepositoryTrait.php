@@ -11,12 +11,12 @@ trait OrderRepositoryTrait
 {
     abstract public function createQueryBuilder($alias, $indexBy = null);
 
-    public function findCountAffiliateSalesByCustomer(CustomerInterface $customer): int
+    public function countSalesByCustomer(CustomerInterface $customer): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
-            ->innerJoin('o.affiliate', 'affiliate')
-            ->andWhere('affiliate.customer = :customer')
+            ->innerJoin('o.affiliate', 'a')
+            ->andWhere('a.customer = :customer')
             ->andWhere('o.paymentState = :paymentState')
             ->setParameter('customer', $customer)
             ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)

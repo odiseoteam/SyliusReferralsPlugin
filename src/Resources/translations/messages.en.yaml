@@ -4,17 +4,17 @@ odiseo_sylius_referrals_plugin:
         copy_this_referral_link: Copy this referral link and share it
         share_link: Share link
         you_must_be_identified_to_share_link: |
-            Affiliate program: <a href="%url%">Sign in</a> to create your unique url to be shared and win rewards for each purchase
+            Affiliates program: <a href="%url%">Sign in</a> to create your unique url to be shared and win rewards for each purchase
         you_are_identified_to_share_link: |
-            Affiliate program: Click in the next button to copy your unique url to be shared and win rewards for each purchase
-        affiliates: Affiliates
-        manage_affiliates: Manage affiliates
-        max_views: Max views
-        max_views_description: Product that referred the most users
-        month_referrals: Month's referrals
-        month_referrals_description: Users followed their referral links
-        average: Average
-        average_description: Referrals who made a purchase
+            Affiliates program: Click in the next button to copy your unique url to be shared and win rewards for each purchase
+        affiliates_program: Affiliates program
+        manage_affiliates_program: Manage affiliates program
+        total_visits: Total visits
+        total_visits_description: Users who followed your referral link
+        total_sales: Total sales
+        total_sales_description: Total sales made through your referral link
+        average: Conversion Rate
+        average_description: Average sales by visits
     email:
         shop:
             promotion_reward:

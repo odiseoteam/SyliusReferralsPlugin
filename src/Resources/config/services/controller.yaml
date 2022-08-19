@@ -5,7 +5,6 @@ services:
         arguments:
             - '@sylius.context.customer'
             - '@sylius.repository.order'
-            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
             - '@odiseo_sylius_referrals_plugin.repository.affiliate_view'
             - '@twig'
 

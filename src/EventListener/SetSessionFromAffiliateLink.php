@@ -43,16 +43,16 @@ class SetSessionFromAffiliateLink
         /** @var Session $session */
         $session = $request->getSession();
 
-        if (!$session->isStarted()) {
-            return;
-        }
-
         if (!$request->query->has(AffiliateInterface::TOKEN_PARAM_NAME)) {
             return;
         }
 
         $tokenValue = $request->query->get(AffiliateInterface::TOKEN_PARAM_NAME);
         if (null === $tokenValue) {
+            return;
+        }
+
+        if ($session->get(AffiliateInterface::TOKEN_PARAM_NAME) === $tokenValue) {
             return;
         }
 

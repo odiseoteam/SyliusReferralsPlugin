@@ -51,6 +51,7 @@ You can see this plugin in action in our Sylius Demo application.
 ## Documentation
 
 - [Installation](doc/installation.md)
+- [Rewards](doc/rewards.md)
 - [Tests](doc/tests.md)
 
 ## Screenshots
