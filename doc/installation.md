@@ -87,7 +87,7 @@ sylius_order:
 6. Add the environment variables
 
 ```
-# Add the promotion code to assign the reward coupon type
+# Add a code to create automatically a Sylius Promotion and coupons to reward your affiliates
 ODISEO_REFERRALS_PROMOTION_CODE=EDITME
 ```
 
