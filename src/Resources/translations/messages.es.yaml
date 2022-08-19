@@ -7,14 +7,14 @@ odiseo_sylius_referrals_plugin:
             Programa de afiliados: <a href="%url%">Iniciar sesión</a> para crear su URL única para compartir y ganar recompensas por cada compra
         you_are_identified_to_share_link: |
             Programa de afiliados: Haga clic en el siguiente botón para copiar su URL única para compartir y ganar recompensas por cada compra
-        affiliates: Afiliados
-        manage_affiliates: Administrar afiliados
-        max_views: Vistas máximas
-        max_views_description: Producto que más usuarios refirió
-        month_referrals: Referidos del mes
-        month_referrals_description: Los usuarios siguieron sus enlaces de referidos
-        average: Promedio
-        average_description: Referidos que hicieron una compra
+        affiliates_program: Programa de afiliados
+        manage_affiliates_program: Administrar programa de afiliados
+        total_visits: Visitas totales
+        total_visits_description: Usuarios que siguieron su enlace de referido
+        total_sales: Ventas totales
+        total_sales_description: Ventas totales realizadas a través de su enlace de referido
+        average: Tasa de conversión
+        average_description: Promedio de ventas por visitas
     email:
         shop:
             promotion_reward:

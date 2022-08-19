@@ -16,8 +16,8 @@ final class AccountMenuListener
             ->addChild('affiliates', [
                 'route' => 'odiseo_sylius_referrals_plugin_shop_account_affiliate_index'
             ])
-            ->setLabel('odiseo_sylius_referrals_plugin.ui.affiliates')
-            ->setLabelAttribute('icon', 'share')
+            ->setLabel('odiseo_sylius_referrals_plugin.ui.affiliates_program')
+            ->setLabelAttribute('icon', 'bullhorn')
         ;
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
-use Odiseo\SyliusReferralsPlugin\Repository\AffiliateRepositoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateViewRepositoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -18,20 +17,17 @@ final class StatisticsAffiliateAction
 {
     private CustomerContextInterface $customerContext;
     private OrderRepositoryInterface $orderRepository;
-    private AffiliateRepositoryInterface $affiliateRepository;
     private AffiliateViewRepositoryInterface $affiliateViewRepository;
     private Environment $twig;
 
     public function __construct(
         CustomerContextInterface $customerContext,
         OrderRepositoryInterface $orderRepository,
-        AffiliateRepositoryInterface $affiliateRepository,
         AffiliateViewRepositoryInterface $affiliateViewRepository,
         Environment $twig
     ) {
         $this->customerContext = $customerContext;
         $this->orderRepository = $orderRepository;
-        $this->affiliateRepository = $affiliateRepository;
         $this->affiliateViewRepository = $affiliateViewRepository;
         $this->twig = $twig;
     }
@@ -44,18 +40,14 @@ final class StatisticsAffiliateAction
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
-        $dateTime = new \DateTime();
-
-        $maxViewsReferredPage = $this->affiliateRepository->findMaxViewReferredPageByCustomer($customer);
-        $maxProductReferredPage = $this->affiliateRepository->findMaxProductReferredPageByCustomer($customer);
-        $average = $this->averageByCustomer($customer);
-        $monthReferrals = $this->affiliateViewRepository->findMonthReferralsByCustomer($customer, $dateTime);
+        $sales = $this->orderRepository->countSalesByCustomer($customer);
+        $visits = $this->affiliateViewRepository->countViewsByCustomer($customer);
+        $average = $this->getAverage($sales, $visits);
 
         $data = [
-            'maxViewsReferredPage' => $maxViewsReferredPage,
-            'maxProductReferredPage' => $maxProductReferredPage,
-            'average' => $average,
-            'monthReferrals' => $monthReferrals,
+            'sales' => $sales,
+            'visits' => $visits,
+            'average' => $average
         ];
 
         $content = $this->twig->render(
@@ -66,15 +58,12 @@ final class StatisticsAffiliateAction
         return new Response($content);
     }
 
-    private function averageByCustomer(CustomerInterface $customer): int
+    private function getAverage(int $sales, int $visits): int
     {
-        $sum = $this->affiliateViewRepository->findViewsByCustomer($customer);
-        $count = $this->orderRepository->findCountAffiliateSalesByCustomer($customer);
-
-        if ($count == 0 || $sum == 0) {
+        if ($sales == 0 || $visits == 0) {
             return 0;
         }
 
-        return (int) (($count / $sum) * 100);
+        return (int) (($sales / $visits) * 100);
     }
 }

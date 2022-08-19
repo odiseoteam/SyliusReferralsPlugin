@@ -9,7 +9,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface AffiliateViewRepositoryInterface extends RepositoryInterface
 {
-    public function findViewsByCustomer(CustomerInterface $customer): int;
-
-    public function findMonthReferralsByCustomer(CustomerInterface $customer, \DateTimeInterface $dateTime): int;
+    public function countViewsByCustomer(CustomerInterface $customer): int;
 }
