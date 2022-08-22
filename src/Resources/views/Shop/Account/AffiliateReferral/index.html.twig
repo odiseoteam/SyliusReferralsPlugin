@@ -1,0 +1,11 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}{{ 'odiseo_sylius_referrals_plugin.ui.affiliates_program'|trans }} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    {% include '@OdiseoSyliusReferralsPlugin/Shop/Account/AffiliateReferral/Index/_breadcrumb.html.twig' %}
+{% endblock %}
+
+{% block subcontent %}
+    {{ sylius_template_event('odiseo_sylius_referrals_plugin.shop.account.affiliate_referral.index.subcontent', _context) }}
+{% endblock %}

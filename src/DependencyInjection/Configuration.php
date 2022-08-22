@@ -11,10 +11,6 @@ final class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('odiseo_sylius_referrals_plugin');
-
-        $treeBuilder->getRootNode();
-
-        return $treeBuilder;
+        return new TreeBuilder('odiseo_sylius_referrals_plugin');
     }
 }

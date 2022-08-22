@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('odiseo_sylius_referrals_plugin_shop_account_affiliate_index') : url('odiseo_sylius_referrals_plugin_shop_account_affiliate_index') %}
+    {% set url = channel.hostname is not null ? 'http://' ~ channel.hostname ~ path('odiseo_sylius_referrals_plugin_shop_account_affiliate_referral_index') : url('odiseo_sylius_referrals_plugin_shop_account_affiliate_referral_index') %}
     <div style="text-align: center; margin-bottom: 30px;">
         {{ 'odiseo_sylius_referrals_plugin.email.shop.promotion_reward.the_coupon'|trans({}, null, localeCode) }}
         <div style="margin: 10px 0;">

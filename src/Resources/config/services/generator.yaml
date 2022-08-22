@@ -1,8 +1,8 @@
 services:
-    odiseo_sylius_referrals_plugin.generator.affiliate:
-        class: Odiseo\SyliusReferralsPlugin\Generator\AffiliateGenerator
+    odiseo_sylius_referrals_plugin.generator.affiliate_referral:
+        class: Odiseo\SyliusReferralsPlugin\Generator\AffiliateReferralGenerator
         public: true
         arguments:
-            - '@odiseo_sylius_referrals_plugin.factory.affiliate'
-            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
+            - '@odiseo_sylius_referrals_plugin.factory.affiliate_referral'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate_referral'
             - '@event_dispatcher'

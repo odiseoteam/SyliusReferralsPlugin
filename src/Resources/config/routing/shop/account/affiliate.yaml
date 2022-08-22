@@ -1,8 +1,0 @@
-odiseo_sylius_referrals_plugin_shop_account_affiliate_index:
-    path: /
-    methods: [GET]
-    defaults:
-        _controller: odiseo_sylius_referrals_plugin.controller.affiliate:indexAction
-        _sylius:
-            section: shop_account
-            template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/index.html.twig"

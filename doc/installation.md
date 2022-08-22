@@ -42,17 +42,17 @@ odiseo_sylius_referrals_plugin_shop:
 
 // ...
 use Doctrine\ORM\Mapping as ORM;
-use Odiseo\SyliusReferralsPlugin\Entity\AffiliateAwareInterface;
-use Odiseo\SyliusReferralsPlugin\Entity\AffiliateTrait;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralAwareInterface;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralTrait;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sylius_order")
  */
-class Order extends BaseOrder implements AffiliateAwareInterface
+class Order extends BaseOrder implements AffiliateReferralAwareInterface
 {
-    use AffiliateTrait;
+    use AffiliateReferralTrait;
 
     // ...
 }

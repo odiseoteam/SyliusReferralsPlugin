@@ -4,22 +4,18 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 
-trait OrderRepositoryTrait
+class AffiliateReferralViewRepository extends EntityRepository implements AffiliateReferralViewRepositoryInterface
 {
-    abstract public function createQueryBuilder($alias, $indexBy = null);
-
-    public function countSalesByCustomer(CustomerInterface $customer): int
+    public function countViewsByCustomer(CustomerInterface $customer): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->innerJoin('o.affiliateReferral', 'ar')
             ->andWhere('ar.customer = :customer')
-            ->andWhere('o.paymentState = :paymentState')
             ->setParameter('customer', $customer)
-            ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
             ->getQuery()
             ->getSingleScalarResult()
         ;
