@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Odiseo\SyliusReferralsPlugin\Entity;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -22,9 +21,9 @@ interface AffiliateReferralInterface extends
 
     public function setTokenValue(?string $tokenValue): void;
 
-    public function getType(): ?string;
+    public function getRewardType(): ?string;
 
-    public function setType(?string $type): void;
+    public function setRewardType(?string $rewardType): void;
 
     public function getExpiresAt(): ?\DateTimeInterface;
 
@@ -32,9 +31,9 @@ interface AffiliateReferralInterface extends
 
     public function isExpired(): bool;
 
-    public function getCustomer(): ?CustomerInterface;
+    public function getAffiliate(): ?AffiliateInterface;
 
-    public function setCustomer(?CustomerInterface $customer): void;
+    public function setAffiliate(?AffiliateInterface $affiliate): void;
 
     public function getProduct(): ?ProductInterface;
 

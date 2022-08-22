@@ -16,6 +16,12 @@ sylius_shop:
     product_grid:
         include_all_descendants: true
 
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: Tests\Odiseo\SyliusReferralsPlugin\Application\Entity\Customer
+
 sylius_order:
     resources:
         order:

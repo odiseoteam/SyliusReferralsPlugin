@@ -12,7 +12,7 @@
         </id>
 
         <field name="tokenValue" type="string" column="token_value" unique="true"/>
-        <field name="type" type="string"/>
+        <field name="rewardType" type="string" column="reward_type"/>
         <field name="expiresAt" type="datetime" column="expires_at" nullable="true"/>
         <field name="createdAt" type="datetime" column="created_at">
             <gedmo:timestampable on="create"/>
@@ -21,8 +21,8 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <many-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
-            <join-column name="customer_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+        <many-to-one field="affiliate" target-entity="Sylius\Component\Customer\Model\CustomerInterface">
+            <join-column name="affiliate_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
 
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface">

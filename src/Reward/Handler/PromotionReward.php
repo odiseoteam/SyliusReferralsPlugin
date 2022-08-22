@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Reward\Handler;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralAwareInterface;
 use Odiseo\SyliusReferralsPlugin\Mailer\RewardEmailManagerInterface;
 use Odiseo\SyliusReferralsPlugin\Reward\RewardHandlerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -72,15 +72,15 @@ class PromotionReward implements RewardHandlerInterface
 
         $this->promotionCouponRepository->add($coupon);
 
-        /** @var CustomerInterface $customer */
-        $customer = $affiliateReferral->getCustomer();
+        /** @var AffiliateInterface $affiliate */
+        $affiliate = $affiliateReferral->getAffiliate();
         /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
         /** @var string $localeCode */
         $localeCode = $order->getLocaleCode();
 
         $this->rewardEmailManager->sendPromotionEmail(
-            $customer,
+            $affiliate,
             $coupon,
             $channel,
             $localeCode

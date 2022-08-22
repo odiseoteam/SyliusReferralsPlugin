@@ -6,7 +6,6 @@ namespace Odiseo\SyliusReferralsPlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
@@ -16,9 +15,9 @@ class AffiliateReferral implements AffiliateReferralInterface
 
     protected ?int $id = null;
     protected ?string $tokenValue = null;
-    protected ?string $type = null;
+    protected ?string $rewardType = null;
     protected ?\DateTimeInterface $expiresAt = null;
-    protected ?CustomerInterface $customer = null;
+    protected ?AffiliateInterface $affiliate = null;
     protected ?ProductInterface $product = null;
 
     /**
@@ -47,14 +46,14 @@ class AffiliateReferral implements AffiliateReferralInterface
         $this->tokenValue = $tokenValue;
     }
 
-    public function getType(): ?string
+    public function getRewardType(): ?string
     {
-        return $this->type;
+        return $this->rewardType;
     }
 
-    public function setType(?string $type): void
+    public function setRewardType(?string $rewardType): void
     {
-        $this->type = $type;
+        $this->rewardType = $rewardType;
     }
 
     public function getExpiresAt(): ?\DateTimeInterface
@@ -78,14 +77,14 @@ class AffiliateReferral implements AffiliateReferralInterface
         return $now > $this->expiresAt;
     }
 
-    public function getCustomer(): ?CustomerInterface
+    public function getAffiliate(): ?AffiliateInterface
     {
-        return $this->customer;
+        return $this->affiliate;
     }
 
-    public function setCustomer(?CustomerInterface $customer): void
+    public function setAffiliate(?AffiliateInterface $affiliate): void
     {
-        $this->customer = $customer;
+        $this->affiliate = $affiliate;
     }
 
     public function getProduct(): ?ProductInterface

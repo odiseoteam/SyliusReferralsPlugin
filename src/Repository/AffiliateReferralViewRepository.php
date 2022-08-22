@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\CustomerInterface;
 
 class AffiliateReferralViewRepository extends EntityRepository implements AffiliateReferralViewRepositoryInterface
 {
-    public function countViewsByCustomer(CustomerInterface $customer): int
+    public function countViewsByAffiliate(AffiliateInterface $affiliate): int
     {
         return (int) $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
             ->innerJoin('o.affiliateReferral', 'ar')
-            ->andWhere('ar.customer = :customer')
-            ->setParameter('customer', $customer)
+            ->andWhere('ar.affiliate = :affiliate')
+            ->setParameter('affiliate', $affiliate)
             ->getQuery()
             ->getSingleScalarResult()
         ;

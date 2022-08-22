@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Repository;
 
-use Sylius\Component\Core\Model\CustomerInterface;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface AffiliateReferralViewRepositoryInterface extends RepositoryInterface
 {
-    public function countViewsByCustomer(CustomerInterface $customer): int;
+    public function countViewsByAffiliate(AffiliateInterface $affiliate): int;
 }

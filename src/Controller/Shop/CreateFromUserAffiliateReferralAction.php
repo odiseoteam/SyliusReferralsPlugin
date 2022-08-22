@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
 use Odiseo\SyliusReferralsPlugin\Generator\AffiliateReferralGeneratorInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralRepositoryInterface;
@@ -12,6 +13,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
@@ -46,7 +48,11 @@ final class CreateFromUserAffiliateReferralAction
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
-        $affiliateReferral = $this->affiliateReferralRepository->findOneByCustomerNotExpired($customer);
+        if (!$customer instanceof AffiliateInterface) {
+            throw new NotFoundHttpException();
+        }
+
+        $affiliateReferral = $this->affiliateReferralRepository->findOneByAffiliateNotExpired($customer);
         if ($affiliateReferral === null) {
             $affiliateReferral = $this->affiliateReferralGenerator->generate($customer);
         }

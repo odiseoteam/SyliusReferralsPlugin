@@ -28,14 +28,14 @@ final class RewardHandler implements RewardHandlerInterface
             return;
         }
 
-        /** @var string $type */
-        $type = $affiliateReferral->getType();
+        /** @var string $rewardType */
+        $rewardType = $affiliateReferral->getRewardType();
 
-        $this->resolve($type)->apply($order);
+        $this->resolve($rewardType)->apply($order);
     }
 
-    private function resolve(string $type): RewardHandlerInterface
+    private function resolve(string $rewardType): RewardHandlerInterface
     {
-        return $this->handlers[$type];
+        return $this->handlers[$rewardType];
     }
 }

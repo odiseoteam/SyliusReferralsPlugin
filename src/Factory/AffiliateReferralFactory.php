@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Factory;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AffiliateReferralFactory implements AffiliateReferralFactoryInterface
@@ -22,11 +22,11 @@ final class AffiliateReferralFactory implements AffiliateReferralFactoryInterfac
         return $this->decoratedFactory->createNew();
     }
 
-    public function createForCustomer(CustomerInterface $customer): AffiliateReferralInterface
+    public function createForAffiliate(AffiliateInterface $affiliate): AffiliateReferralInterface
     {
         /** @var AffiliateReferralInterface $affiliateReferral */
         $affiliateReferral = $this->decoratedFactory->createNew();
-        $affiliateReferral->setCustomer($customer);
+        $affiliateReferral->setAffiliate($affiliate);
         $affiliateReferral->setTokenValue($this->generateTokenValue());
 
         return $affiliateReferral;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
 use Odiseo\SyliusReferralsPlugin\Generator\AffiliateReferralGeneratorInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralRepositoryInterface;
@@ -49,6 +50,10 @@ final class CreateFromProductAffiliateReferralAction
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
+        if (!$customer instanceof AffiliateInterface) {
+            throw new NotFoundHttpException();
+        }
+
         $productId = $request->attributes->get('id');
 
         /** @var ProductInterface|null $product */
@@ -57,7 +62,7 @@ final class CreateFromProductAffiliateReferralAction
             throw new NotFoundHttpException();
         }
 
-        $affiliateReferral = $this->affiliateReferralRepository->findOneByCustomerAndProductNotExpired($customer, $product);
+        $affiliateReferral = $this->affiliateReferralRepository->findOneByAffiliateAndProductNotExpired($customer, $product);
         if ($affiliateReferral === null) {
             $affiliateReferral = $this->affiliateReferralGenerator->generate($customer, $product);
         }

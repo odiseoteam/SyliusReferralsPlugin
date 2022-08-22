@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Controller\Shop;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralViewRepositoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -11,6 +12,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment;
 
 final class StatisticsAffiliateReferralAction
@@ -40,8 +42,12 @@ final class StatisticsAffiliateReferralAction
             throw new HttpException(Response::HTTP_UNAUTHORIZED);
         }
 
-        $sales = $this->orderRepository->countSalesByCustomer($customer);
-        $visits = $this->affiliateReferralViewRepository->countViewsByCustomer($customer);
+        if (!$customer instanceof AffiliateInterface) {
+            throw new NotFoundHttpException();
+        }
+
+        $sales = $this->orderRepository->countSalesByAffiliate($customer);
+        $visits = $this->affiliateReferralViewRepository->countViewsByAffiliate($customer);
         $average = $this->getAverage($sales, $visits);
 
         $data = [

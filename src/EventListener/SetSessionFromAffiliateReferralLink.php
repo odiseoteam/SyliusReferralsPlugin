@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\EventListener;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralView;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralRepositoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralViewRepositoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -86,8 +86,8 @@ class SetSessionFromAffiliateReferralLink
 
         if ($shopUser instanceof ShopUserInterface) {
             $customer = $shopUser->getCustomer();
-            if ($customer instanceof CustomerInterface) {
-                if ($customer === $affiliateReferral->getCustomer()) {
+            if ($customer instanceof AffiliateInterface) {
+                if ($customer === $affiliateReferral->getAffiliate()) {
                     return;
                 }
             }

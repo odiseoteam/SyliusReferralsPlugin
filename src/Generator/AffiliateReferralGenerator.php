@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Generator;
 
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
 use Odiseo\SyliusReferralsPlugin\Event\AffiliateReferralEvent;
 use Odiseo\SyliusReferralsPlugin\Factory\AffiliateReferralFactoryInterface;
 use Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralRepositoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -28,15 +28,15 @@ final class AffiliateReferralGenerator implements AffiliateReferralGeneratorInte
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function generate(CustomerInterface $customer, ?ProductInterface $product = null): AffiliateReferralInterface
+    public function generate(AffiliateInterface $affiliate, ?ProductInterface $product = null): AffiliateReferralInterface
     {
         $this->eventDispatcher->dispatch(
             new AffiliateReferralEvent(),
             AffiliateReferralEvent::PRE_GENERATE
         );
 
-        $affiliateReferral = $this->affiliateReferralFactory->createForCustomer($customer);
-        $affiliateReferral->setType(AffiliateReferralInterface::REWARD_TYPE_PROMOTION);
+        $affiliateReferral = $this->affiliateReferralFactory->createForAffiliate($affiliate);
+        $affiliateReferral->setRewardType(AffiliateReferralInterface::REWARD_TYPE_PROMOTION);
         if ($product instanceof ProductInterface) {
             $affiliateReferral->setProduct($product);
             $affiliateReferral->setExpiresAt(new \DateTime('+15 day'));
