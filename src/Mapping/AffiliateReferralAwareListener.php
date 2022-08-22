@@ -52,8 +52,11 @@ final class AffiliateReferralAwareListener implements EventSubscriber
         }
     }
 
-    private function mapAffiliateReferralAware(ClassMetadata $metadata, string $joinColumn, ?string $inversedBy = null): void
-    {
+    private function mapAffiliateReferralAware(
+        ClassMetadata $metadata,
+        string $joinColumn,
+        ?string $inversedBy = null
+    ): void {
         try {
             $affiliateReferralMetadata = $this->resourceMetadataRegistry->getByClass($this->affiliateReferralClass);
         } catch (\InvalidArgumentException $exception) {

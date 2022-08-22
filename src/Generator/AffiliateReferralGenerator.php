@@ -28,8 +28,10 @@ final class AffiliateReferralGenerator implements AffiliateReferralGeneratorInte
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function generate(AffiliateInterface $affiliate, ?ProductInterface $product = null): AffiliateReferralInterface
-    {
+    public function generate(
+        AffiliateInterface $affiliate,
+        ?ProductInterface $product = null
+    ): AffiliateReferralInterface {
         $this->eventDispatcher->dispatch(
             new AffiliateReferralEvent(),
             AffiliateReferralEvent::PRE_GENERATE

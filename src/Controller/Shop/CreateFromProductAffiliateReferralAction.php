@@ -62,7 +62,11 @@ final class CreateFromProductAffiliateReferralAction
             throw new NotFoundHttpException();
         }
 
-        $affiliateReferral = $this->affiliateReferralRepository->findOneByAffiliateAndProductNotExpired($customer, $product);
+        $affiliateReferral = $this->affiliateReferralRepository->findOneByAffiliateAndProductNotExpired(
+            $customer,
+            $product
+        );
+
         if ($affiliateReferral === null) {
             $affiliateReferral = $this->affiliateReferralGenerator->generate($customer, $product);
         }

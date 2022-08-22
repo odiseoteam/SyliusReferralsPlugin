@@ -10,5 +10,8 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface AffiliateReferralGeneratorInterface
 {
-    public function generate(AffiliateInterface $affiliate, ?ProductInterface $product = null): AffiliateReferralInterface;
+    public function generate(
+        AffiliateInterface $affiliate,
+        ?ProductInterface $product = null
+    ): AffiliateReferralInterface;
 }

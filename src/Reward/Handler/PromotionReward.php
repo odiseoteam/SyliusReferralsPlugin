@@ -9,6 +9,7 @@ use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralAwareInterface;
 use Odiseo\SyliusReferralsPlugin\Mailer\RewardEmailManagerInterface;
 use Odiseo\SyliusReferralsPlugin\Reward\RewardHandlerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -49,6 +50,12 @@ class PromotionReward implements RewardHandlerInterface
             return;
         }
 
+        /** @var AffiliateInterface $affiliate */
+        $affiliate = $affiliateReferral->getAffiliate();
+        if (!$affiliate instanceof CustomerInterface) {
+            return;
+        }
+
         /** @var PromotionInterface|null $promotion */
         $promotion = $this->promotionRepository->findOneBy([
             'code' => $this->promotionCode
@@ -72,8 +79,6 @@ class PromotionReward implements RewardHandlerInterface
 
         $this->promotionCouponRepository->add($coupon);
 
-        /** @var AffiliateInterface $affiliate */
-        $affiliate = $affiliateReferral->getAffiliate();
         /** @var ChannelInterface $channel */
         $channel = $order->getChannel();
         /** @var string $localeCode */
