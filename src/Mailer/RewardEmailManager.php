@@ -29,7 +29,6 @@ final class RewardEmailManager implements RewardEmailManagerInterface
             Emails::PROMOTION_REWARD,
             [$customer->getEmail()],
             [
-                'customer' => $customer,
                 'coupon' => $coupon,
                 'channel' => $channel,
                 'localeCode' => $localeCode,

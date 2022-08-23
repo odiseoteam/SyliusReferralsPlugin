@@ -2,26 +2,26 @@ sylius_ui:
     events:
         sylius.shop.product.show.right_sidebar:
             blocks:
-                affiliate: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_affiliate.html.twig'
+                affiliate: '@OdiseoSyliusReferralsPlugin/Shop/Product/Show/_affiliate_referral.html.twig'
 
-        odiseo_sylius_referrals_plugin.shop.account.affiliate.index.subcontent:
+        odiseo_sylius_referrals_plugin.shop.account.affiliate_referral.index.subcontent:
             blocks:
                 header:
-                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_header.html.twig"
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/AffiliateReferral/Index/_header.html.twig"
                     priority: 25
                 after_content_header_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 20
                     context:
-                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate.index.after_content_header
+                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate_referral.index.after_content_header
                 link:
-                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_link.html.twig"
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/AffiliateReferral/Index/_link.html.twig"
                     priority: 15
                 statistics:
-                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/Affiliate/Index/_statistics.html.twig"
+                    template: "@OdiseoSyliusReferralsPlugin/Shop/Account/AffiliateReferral/Index/_statistics.html.twig"
                     priority: 10
                 after_grid_legacy:
                     template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
                     priority: 5
                     context:
-                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate.index.after_grid
+                        event: odiseo_sylius_referrals_plugin.shop.account.affiliate_referral.index.after_grid

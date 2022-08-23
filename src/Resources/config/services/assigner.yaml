@@ -1,6 +1,6 @@
 services:
-    odiseo_sylius_referrals_plugin.assigner.affiliate:
-        class: Odiseo\SyliusReferralsPlugin\Assigner\AffiliateAssigner
+    odiseo_sylius_referrals_plugin.assigner.affiliate_referral:
+        class: Odiseo\SyliusReferralsPlugin\Assigner\AffiliateReferralAssigner
         public: true
         arguments:
-            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate_referral'

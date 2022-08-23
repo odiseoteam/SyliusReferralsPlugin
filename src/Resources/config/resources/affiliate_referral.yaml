@@ -1,0 +1,20 @@
+sylius_resource:
+    resources:
+        odiseo_sylius_referrals_plugin.affiliate_referral:
+            driver: doctrine/orm
+            classes:
+                model: Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferral
+                interface: Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface
+                form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
+                repository: Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralRepository
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                factory: Sylius\Component\Resource\Factory\Factory
+        odiseo_sylius_referrals_plugin.affiliate_referral_view:
+            driver: doctrine/orm
+            classes:
+                model: Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralView
+                interface: Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralViewInterface
+                form: Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType
+                repository: Odiseo\SyliusReferralsPlugin\Repository\AffiliateReferralViewRepository
+                controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                factory: Sylius\Component\Resource\Factory\Factory

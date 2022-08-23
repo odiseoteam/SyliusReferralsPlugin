@@ -38,21 +38,40 @@ odiseo_sylius_referrals_plugin_shop:
 
 ```php
 <?php
+// src/Entity/Customer/Customer.php
+
+// ...
+use Doctrine\ORM\Mapping as ORM;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="sylius_customer")
+ */
+class Customer extends BaseCustomer implements AffiliateInterface
+{
+    // ...
+}
+```
+
+```php
+<?php
 // src/Entity/Order/Order.php
 
 // ...
 use Doctrine\ORM\Mapping as ORM;
-use Odiseo\SyliusReferralsPlugin\Entity\AffiliateAwareInterface;
-use Odiseo\SyliusReferralsPlugin\Entity\AffiliateTrait;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralAwareInterface;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralTrait;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="sylius_order")
  */
-class Order extends BaseOrder implements AffiliateAwareInterface
+class Order extends BaseOrder implements AffiliateReferralAwareInterface
 {
-    use AffiliateTrait;
+    use AffiliateReferralTrait;
 
     // ...
 }

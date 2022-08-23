@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Odiseo\SyliusReferralsPlugin\Reward;
 
-use Odiseo\SyliusReferralsPlugin\Entity\AffiliateAwareInterface;
+use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralAwareInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Traversable;
 
@@ -20,22 +20,22 @@ final class RewardHandler implements RewardHandlerInterface
 
     public function apply(OrderInterface $order): void
     {
-        if (!$order instanceof AffiliateAwareInterface) {
+        if (!$order instanceof AffiliateReferralAwareInterface) {
             return;
         }
 
-        if (null === $affiliate = $order->getAffiliate()) {
+        if (null === $affiliateReferral = $order->getAffiliateReferral()) {
             return;
         }
 
-        /** @var string $type */
-        $type = $affiliate->getType();
+        /** @var string $rewardType */
+        $rewardType = $affiliateReferral->getRewardType();
 
-        $this->resolve($type)->apply($order);
+        $this->resolve($rewardType)->apply($order);
     }
 
-    private function resolve(string $type): RewardHandlerInterface
+    private function resolve(string $rewardType): RewardHandlerInterface
     {
-        return $this->handlers[$type];
+        return $this->handlers[$rewardType];
     }
 }

@@ -13,8 +13,8 @@ final class AccountMenuListener
         $menu = $event->getMenu();
 
         $menu
-            ->addChild('affiliates', [
-                'route' => 'odiseo_sylius_referrals_plugin_shop_account_affiliate_index'
+            ->addChild('affiliates_program', [
+                'route' => 'odiseo_sylius_referrals_plugin_shop_account_affiliate_referral_index'
             ])
             ->setLabel('odiseo_sylius_referrals_plugin.ui.affiliates_program')
             ->setLabelAttribute('icon', 'bullhorn')

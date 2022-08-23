@@ -4,19 +4,19 @@ services:
         tags:
             - { name: kernel.event_listener, event: sylius.menu.shop.account, method: addAccountMenuItems }
 
-    odiseo_sylius_referrals_plugin.event_listener.set_session_from_affiliate_link:
-        class: Odiseo\SyliusReferralsPlugin\EventListener\SetSessionFromAffiliateLink
+    odiseo_sylius_referrals_plugin.event_listener.set_session_from_affiliate_referral_link:
+        class: Odiseo\SyliusReferralsPlugin\EventListener\SetSessionFromAffiliateReferralLink
         arguments:
             - '@security.token_storage'
-            - '@odiseo_sylius_referrals_plugin.repository.affiliate'
-            - '@odiseo_sylius_referrals_plugin.repository.affiliate_view'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate_referral'
+            - '@odiseo_sylius_referrals_plugin.repository.affiliate_referral_view'
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: setSession }
 
-    odiseo_sylius_referrals_plugin.event_listener.affiliate_aware_listener:
-        class: Odiseo\SyliusReferralsPlugin\Mapping\AffiliateAwareListener
+    odiseo_sylius_referrals_plugin.event_listener.affiliate_referral_aware_listener:
+        class: Odiseo\SyliusReferralsPlugin\Mapping\AffiliateReferralAwareListener
         arguments:
             - '@sylius.resource_registry'
-            - '%odiseo_sylius_referrals_plugin.model.affiliate.class%'
+            - '%odiseo_sylius_referrals_plugin.model.affiliate_referral.class%'
         tags:
             - { name: doctrine.event_subscriber, connection: default, priority: 99 }
