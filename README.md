@@ -31,13 +31,20 @@
 
 This Sylius Plugin helps you to reach new customers, grow your business, and build customer loyalty through a referrals program.
 
-**Reward customers for referrals**
+#### <ins>Reward customers for referrals</ins>
 
 Turn your customers into influencers, reward them when they refer a friend, and find new customers organically.
 
-**Rewards and incentives model**
+#### <ins>Rewards and incentives model</ins>
 
-This plugin comes with a rewards mechanism to allow you to manage the rewards for your affiliates.
+This plugin comes with a rewards mechanism to allow you to manage the rewards for your affiliates. We have two reward types included in this plugin:
+
+- Promotion Coupon: For each sale the affiliate will be reward with a promotion coupon that will be automatically sent by email.
+- Virtual Wallet: For each sale the affiliate receive a commission to their Virtual Wallet. Then they can withdraw their money to the Bank or Paypal account. ** **Coming Soon** **
+
+You can add your own reward type following this [guide](doc/rewards.md).
+
+
 
 **Support Sylius version 1.10+.**
 
