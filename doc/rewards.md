@@ -1,11 +1,11 @@
 ## Rewards
 
 You can add rewards to the affiliates.
-This plugin supports **Promotion Coupon** type, but you can create your own reward easily.
+This plugin supports **Promotion Coupon** reward type, but you can create your own reward easily.
 
 ### Adding a new reward type
 
-In the following example, a new reward will be configured.
+In the following example, a new reward type will be configured.
 
 1. Set up a service for handling the new reward type
 
