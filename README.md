@@ -56,8 +56,8 @@ You can see this plugin in action in our Sylius Demo application.
 
 ## Screenshots
 
-<img src="https://github.com/odiseoteam/SyliusReferralsPlugin/blob/master/screenshot_1.png" alt="Share link button" width="650">
-<img src="https://github.com/odiseoteam/SyliusReferralsPlugin/blob/master/screenshot_2.png" alt="Referrals program account info" width="650">
+![image](https://user-images.githubusercontent.com/429512/186450005-6561e7d9-fd40-4070-b46f-c24829e3fda1.png)
+![image](https://user-images.githubusercontent.com/429512/186450497-5568a0ae-f458-4c97-b5b5-2d803e8940f0.png)
 
 ## Credits
 
