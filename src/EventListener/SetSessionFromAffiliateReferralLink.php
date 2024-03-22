@@ -18,20 +18,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class SetSessionFromAffiliateReferralLink
 {
-    private TokenStorageInterface $tokenStorage;
-
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-
-    private AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
-        AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository,
+        private TokenStorageInterface $tokenStorage,
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
+        private AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository,
     ) {
-        $this->tokenStorage = $tokenStorage;
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
-        $this->affiliateReferralViewRepository = $affiliateReferralViewRepository;
     }
 
     public function setSession(RequestEvent $event): void

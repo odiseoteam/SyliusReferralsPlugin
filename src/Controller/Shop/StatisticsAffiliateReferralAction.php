@@ -17,24 +17,12 @@ use Twig\Environment;
 
 final class StatisticsAffiliateReferralAction
 {
-    private CustomerContextInterface $customerContext;
-
-    private OrderRepositoryInterface $orderRepository;
-
-    private AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository;
-
-    private Environment $twig;
-
     public function __construct(
-        CustomerContextInterface $customerContext,
-        OrderRepositoryInterface $orderRepository,
-        AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository,
-        Environment $twig,
+        private CustomerContextInterface $customerContext,
+        private OrderRepositoryInterface $orderRepository,
+        private AffiliateReferralViewRepositoryInterface $affiliateReferralViewRepository,
+        private Environment $twig,
     ) {
-        $this->customerContext = $customerContext;
-        $this->orderRepository = $orderRepository;
-        $this->affiliateReferralViewRepository = $affiliateReferralViewRepository;
-        $this->twig = $twig;
     }
 
     public function __invoke(Request $request): Response

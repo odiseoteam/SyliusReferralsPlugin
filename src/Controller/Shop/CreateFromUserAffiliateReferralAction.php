@@ -20,28 +20,13 @@ use Twig\Environment;
 
 final class CreateFromUserAffiliateReferralAction
 {
-    private CustomerContextInterface $customerContext;
-
-    private AffiliateReferralGeneratorInterface $affiliateReferralGenerator;
-
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-
-    private RouterInterface $router;
-
-    private Environment $twig;
-
     public function __construct(
-        CustomerContextInterface $customerContext,
-        AffiliateReferralGeneratorInterface $affiliateReferralGenerator,
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
-        RouterInterface $router,
-        Environment $twig,
+        private CustomerContextInterface $customerContext,
+        private AffiliateReferralGeneratorInterface $affiliateReferralGenerator,
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
+        private RouterInterface $router,
+        private Environment $twig,
     ) {
-        $this->customerContext = $customerContext;
-        $this->affiliateReferralGenerator = $affiliateReferralGenerator;
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
-        $this->router = $router;
-        $this->twig = $twig;
     }
 
     public function __invoke(Request $request): Response

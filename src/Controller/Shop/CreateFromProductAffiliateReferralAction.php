@@ -22,28 +22,13 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class CreateFromProductAffiliateReferralAction
 {
-    private CustomerContextInterface $customerContext;
-
-    private ProductRepositoryInterface $productRepository;
-
-    private AffiliateReferralGeneratorInterface $affiliateReferralGenerator;
-
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-
-    private RouterInterface $router;
-
     public function __construct(
-        CustomerContextInterface $customerContext,
-        ProductRepositoryInterface $productRepository,
-        AffiliateReferralGeneratorInterface $affiliateReferralGenerator,
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
-        RouterInterface $router,
+        private CustomerContextInterface $customerContext,
+        private ProductRepositoryInterface $productRepository,
+        private AffiliateReferralGeneratorInterface $affiliateReferralGenerator,
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
+        private RouterInterface $router,
     ) {
-        $this->customerContext = $customerContext;
-        $this->productRepository = $productRepository;
-        $this->affiliateReferralGenerator = $affiliateReferralGenerator;
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
-        $this->router = $router;
     }
 
     public function __invoke(Request $request): Response

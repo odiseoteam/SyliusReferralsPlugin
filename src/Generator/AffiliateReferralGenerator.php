@@ -14,20 +14,11 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class AffiliateReferralGenerator implements AffiliateReferralGeneratorInterface
 {
-    private AffiliateReferralFactoryInterface $affiliateReferralFactory;
-
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-
-    private EventDispatcherInterface $eventDispatcher;
-
     public function __construct(
-        AffiliateReferralFactoryInterface $affiliateReferralFactory,
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
-        EventDispatcherInterface $eventDispatcher,
+        private AffiliateReferralFactoryInterface $affiliateReferralFactory,
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
-        $this->affiliateReferralFactory = $affiliateReferralFactory;
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function generate(

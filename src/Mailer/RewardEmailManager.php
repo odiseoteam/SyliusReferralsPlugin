@@ -11,12 +11,9 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class RewardEmailManager implements RewardEmailManagerInterface
 {
-    private SenderInterface $emailSender;
-
     public function __construct(
-        SenderInterface $emailSender,
+        private SenderInterface $emailSender,
     ) {
-        $this->emailSender = $emailSender;
     }
 
     public function sendPromotionEmail(

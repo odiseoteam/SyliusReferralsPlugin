@@ -14,16 +14,10 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 final class AffiliateReferralAwareListener implements EventSubscriber
 {
-    private RegistryInterface $resourceMetadataRegistry;
-
-    private string $affiliateReferralClass;
-
     public function __construct(
-        RegistryInterface $resourceMetadataRegistry,
-        string $affiliateReferralClass,
+        private RegistryInterface $resourceMetadataRegistry,
+        private string $affiliateReferralClass,
     ) {
-        $this->resourceMetadataRegistry = $resourceMetadataRegistry;
-        $this->affiliateReferralClass = $affiliateReferralClass;
     }
 
     public function getSubscribedEvents(): array
