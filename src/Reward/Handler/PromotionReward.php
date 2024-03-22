@@ -21,9 +21,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PromotionReward implements RewardHandlerInterface
 {
     private PromotionRepositoryInterface $promotionRepository;
+
     private PromotionCouponFactoryInterface $promotionCouponFactory;
+
     private PromotionCouponRepositoryInterface $promotionCouponRepository;
+
     private RewardEmailManagerInterface $rewardEmailManager;
+
     private string $promotionCode;
 
     public function __construct(
@@ -31,7 +35,7 @@ class PromotionReward implements RewardHandlerInterface
         PromotionCouponFactoryInterface $promotionCouponFactory,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         RewardEmailManagerInterface $rewardEmailManager,
-        string $promotionCode
+        string $promotionCode,
     ) {
         $this->promotionRepository = $promotionRepository;
         $this->promotionCouponFactory = $promotionCouponFactory;
@@ -58,7 +62,7 @@ class PromotionReward implements RewardHandlerInterface
 
         /** @var PromotionInterface|null $promotion */
         $promotion = $this->promotionRepository->findOneBy([
-            'code' => $this->promotionCode
+            'code' => $this->promotionCode,
         ]);
 
         if (null === $promotion) {
@@ -88,7 +92,7 @@ class PromotionReward implements RewardHandlerInterface
             $affiliate,
             $coupon,
             $channel,
-            $localeCode
+            $localeCode,
         );
     }
 

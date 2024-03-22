@@ -11,7 +11,7 @@ final class RewardManager implements RewardManagerInterface
     private RewardHandlerInterface $rewardHandler;
 
     public function __construct(
-        RewardHandlerInterface $rewardHandler
+        RewardHandlerInterface $rewardHandler,
     ) {
         $this->rewardHandler = $rewardHandler;
     }

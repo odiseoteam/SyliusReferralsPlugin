@@ -11,7 +11,9 @@ class AffiliateReferralView implements AffiliateReferralViewInterface
     use TimestampableTrait;
 
     protected ?int $id = null;
+
     protected ?string $ip = null;
+
     protected ?AffiliateReferralInterface $affiliateReferral = null;
 
     public function __construct()

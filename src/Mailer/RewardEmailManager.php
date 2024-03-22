@@ -14,7 +14,7 @@ final class RewardEmailManager implements RewardEmailManagerInterface
     private SenderInterface $emailSender;
 
     public function __construct(
-        SenderInterface $emailSender
+        SenderInterface $emailSender,
     ) {
         $this->emailSender = $emailSender;
     }
@@ -23,8 +23,11 @@ final class RewardEmailManager implements RewardEmailManagerInterface
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
         ChannelInterface $channel,
-        string $localeCode
+        string $localeCode,
     ): void {
+        /**
+         * @psalm-suppress DeprecatedMethod
+         */
         $this->emailSender->send(
             Emails::PROMOTION_REWARD,
             [$customer->getEmail()],

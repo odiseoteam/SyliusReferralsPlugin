@@ -6,8 +6,8 @@ namespace Odiseo\SyliusReferralsPlugin\Repository;
 
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateInterface;
 use Odiseo\SyliusReferralsPlugin\Entity\AffiliateReferralInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ProductInterface;
 
 class AffiliateReferralRepository extends EntityRepository implements AffiliateReferralRepositoryInterface
 {
@@ -26,7 +26,7 @@ class AffiliateReferralRepository extends EntityRepository implements AffiliateR
 
     public function findOneByAffiliateAndProductNotExpired(
         AffiliateInterface $affiliate,
-        ProductInterface $product
+        ProductInterface $product,
     ): ?AffiliateReferralInterface {
         return $this->createQueryBuilder('o')
             ->andWhere('o.affiliate = :affiliate')

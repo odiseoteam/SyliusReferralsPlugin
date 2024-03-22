@@ -14,15 +14,18 @@ class AffiliateReferral implements AffiliateReferralInterface
     use TimestampableTrait;
 
     protected ?int $id = null;
+
     protected ?string $tokenValue = null;
+
     protected ?string $rewardType = null;
+
     protected ?\DateTimeInterface $expiresAt = null;
+
     protected ?AffiliateInterface $affiliate = null;
+
     protected ?ProductInterface $product = null;
 
-    /**
-     * @psalm-var Collection<array-key, AffiliateReferralViewInterface>
-     */
+    /** @psalm-var Collection<array-key, AffiliateReferralViewInterface> */
     protected Collection $views;
 
     public function __construct()

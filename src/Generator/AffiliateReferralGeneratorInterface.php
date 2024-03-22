@@ -12,6 +12,6 @@ interface AffiliateReferralGeneratorInterface
 {
     public function generate(
         AffiliateInterface $affiliate,
-        ?ProductInterface $product = null
+        ?ProductInterface $product = null,
     ): AffiliateReferralInterface;
 }

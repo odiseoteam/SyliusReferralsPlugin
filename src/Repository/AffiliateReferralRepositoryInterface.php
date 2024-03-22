@@ -15,6 +15,6 @@ interface AffiliateReferralRepositoryInterface extends RepositoryInterface
 
     public function findOneByAffiliateAndProductNotExpired(
         AffiliateInterface $affiliate,
-        ProductInterface $product
+        ProductInterface $product,
     ): ?AffiliateReferralInterface;
 }

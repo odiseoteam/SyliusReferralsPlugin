@@ -15,11 +15,12 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 final class AffiliateReferralAwareListener implements EventSubscriber
 {
     private RegistryInterface $resourceMetadataRegistry;
+
     private string $affiliateReferralClass;
 
     public function __construct(
         RegistryInterface $resourceMetadataRegistry,
-        string $affiliateReferralClass
+        string $affiliateReferralClass,
     ) {
         $this->resourceMetadataRegistry = $resourceMetadataRegistry;
         $this->affiliateReferralClass = $affiliateReferralClass;
@@ -55,7 +56,7 @@ final class AffiliateReferralAwareListener implements EventSubscriber
     private function mapAffiliateReferralAware(
         ClassMetadata $metadata,
         string $joinColumn,
-        ?string $inversedBy = null
+        ?string $inversedBy = null,
     ): void {
         try {
             $affiliateReferralMetadata = $this->resourceMetadataRegistry->getByClass($this->affiliateReferralClass);
@@ -71,9 +72,9 @@ final class AffiliateReferralAwareListener implements EventSubscriber
                     [
                         'name' => $joinColumn,
                         'referencedColumnName' => 'id',
-                    ]
+                    ],
                 ],
-                'cascade' => ['persist']
+                'cascade' => ['persist'],
             ];
 
             if (null !== $inversedBy) {

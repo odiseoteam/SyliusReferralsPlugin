@@ -15,7 +15,7 @@ final class AffiliateReferralAssigner implements AffiliateReferralAssignerInterf
     private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
 
     public function __construct(
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository
+        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
     ) {
         $this->affiliateReferralRepository = $affiliateReferralRepository;
     }
@@ -30,7 +30,7 @@ final class AffiliateReferralAssigner implements AffiliateReferralAssignerInterf
 
         /** @var AffiliateReferralInterface|null $affiliateReferral */
         $affiliateReferral = $this->affiliateReferralRepository->findOneBy([
-            'tokenValue' => $session->get(AffiliateReferralInterface::TOKEN_PARAM_NAME)
+            'tokenValue' => $session->get(AffiliateReferralInterface::TOKEN_PARAM_NAME),
         ]);
 
         if (null === $affiliateReferral) {

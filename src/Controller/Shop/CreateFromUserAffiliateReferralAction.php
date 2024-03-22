@@ -21,9 +21,13 @@ use Twig\Environment;
 final class CreateFromUserAffiliateReferralAction
 {
     private CustomerContextInterface $customerContext;
+
     private AffiliateReferralGeneratorInterface $affiliateReferralGenerator;
+
     private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
+
     private RouterInterface $router;
+
     private Environment $twig;
 
     public function __construct(
@@ -31,7 +35,7 @@ final class CreateFromUserAffiliateReferralAction
         AffiliateReferralGeneratorInterface $affiliateReferralGenerator,
         AffiliateReferralRepositoryInterface $affiliateReferralRepository,
         RouterInterface $router,
-        Environment $twig
+        Environment $twig,
     ) {
         $this->customerContext = $customerContext;
         $this->affiliateReferralGenerator = $affiliateReferralGenerator;
@@ -65,7 +69,7 @@ final class CreateFromUserAffiliateReferralAction
 
         $content = $this->twig->render(
             '@OdiseoSyliusReferralsPlugin/Shop/Account/AffiliateReferral/Index/Link/_template.html.twig',
-            $data
+            $data,
         );
 
         return new Response($content);
@@ -76,9 +80,9 @@ final class CreateFromUserAffiliateReferralAction
         return $this->router->generate(
             'sylius_shop_homepage',
             [
-                AffiliateReferralInterface::TOKEN_PARAM_NAME => $affiliateReferral->getTokenValue()
+                AffiliateReferralInterface::TOKEN_PARAM_NAME => $affiliateReferral->getTokenValue(),
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
     }
 }
