@@ -8,12 +8,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class RewardManager implements RewardManagerInterface
 {
-    private RewardHandlerInterface $rewardHandler;
-
     public function __construct(
-        RewardHandlerInterface $rewardHandler
+        private RewardHandlerInterface $rewardHandler,
     ) {
-        $this->rewardHandler = $rewardHandler;
     }
 
     public function create(OrderInterface $order): void

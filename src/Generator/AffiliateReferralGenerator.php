@@ -14,27 +14,20 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class AffiliateReferralGenerator implements AffiliateReferralGeneratorInterface
 {
-    private AffiliateReferralFactoryInterface $affiliateReferralFactory;
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-    private EventDispatcherInterface $eventDispatcher;
-
     public function __construct(
-        AffiliateReferralFactoryInterface $affiliateReferralFactory,
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository,
-        EventDispatcherInterface $eventDispatcher
+        private AffiliateReferralFactoryInterface $affiliateReferralFactory,
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
-        $this->affiliateReferralFactory = $affiliateReferralFactory;
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function generate(
         AffiliateInterface $affiliate,
-        ?ProductInterface $product = null
+        ?ProductInterface $product = null,
     ): AffiliateReferralInterface {
         $this->eventDispatcher->dispatch(
             new AffiliateReferralEvent(),
-            AffiliateReferralEvent::PRE_GENERATE
+            AffiliateReferralEvent::PRE_GENERATE,
         );
 
         $affiliateReferral = $this->affiliateReferralFactory->createForAffiliate($affiliate);
@@ -46,14 +39,14 @@ final class AffiliateReferralGenerator implements AffiliateReferralGeneratorInte
 
         $this->eventDispatcher->dispatch(
             new AffiliateReferralEvent(),
-            AffiliateReferralEvent::GENERATE
+            AffiliateReferralEvent::GENERATE,
         );
 
         $this->affiliateReferralRepository->add($affiliateReferral);
 
         $this->eventDispatcher->dispatch(
             new AffiliateReferralEvent(),
-            AffiliateReferralEvent::POST_GENERATE
+            AffiliateReferralEvent::POST_GENERATE,
         );
 
         return $affiliateReferral;

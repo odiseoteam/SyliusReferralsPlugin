@@ -13,7 +13,7 @@ final class RewardHandler implements RewardHandlerInterface
     private array $handlers;
 
     public function __construct(
-        Traversable $handlers
+        Traversable $handlers,
     ) {
         $this->handlers = iterator_to_array($handlers);
     }

@@ -20,24 +20,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PromotionReward implements RewardHandlerInterface
 {
-    private PromotionRepositoryInterface $promotionRepository;
-    private PromotionCouponFactoryInterface $promotionCouponFactory;
-    private PromotionCouponRepositoryInterface $promotionCouponRepository;
-    private RewardEmailManagerInterface $rewardEmailManager;
-    private string $promotionCode;
-
     public function __construct(
-        PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponFactoryInterface $promotionCouponFactory,
-        PromotionCouponRepositoryInterface $promotionCouponRepository,
-        RewardEmailManagerInterface $rewardEmailManager,
-        string $promotionCode
+        private PromotionRepositoryInterface $promotionRepository,
+        private PromotionCouponFactoryInterface $promotionCouponFactory,
+        private PromotionCouponRepositoryInterface $promotionCouponRepository,
+        private RewardEmailManagerInterface $rewardEmailManager,
+        private string $promotionCode,
     ) {
-        $this->promotionRepository = $promotionRepository;
-        $this->promotionCouponFactory = $promotionCouponFactory;
-        $this->promotionCouponRepository = $promotionCouponRepository;
-        $this->rewardEmailManager = $rewardEmailManager;
-        $this->promotionCode = $promotionCode;
     }
 
     public function apply(OrderInterface $order): void
@@ -58,7 +47,7 @@ class PromotionReward implements RewardHandlerInterface
 
         /** @var PromotionInterface|null $promotion */
         $promotion = $this->promotionRepository->findOneBy([
-            'code' => $this->promotionCode
+            'code' => $this->promotionCode,
         ]);
 
         if (null === $promotion) {
@@ -88,7 +77,7 @@ class PromotionReward implements RewardHandlerInterface
             $affiliate,
             $coupon,
             $channel,
-            $localeCode
+            $localeCode,
         );
     }
 

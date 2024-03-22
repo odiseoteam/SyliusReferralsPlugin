@@ -12,12 +12,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class AffiliateReferralAssigner implements AffiliateReferralAssignerInterface
 {
-    private AffiliateReferralRepositoryInterface $affiliateReferralRepository;
-
     public function __construct(
-        AffiliateReferralRepositoryInterface $affiliateReferralRepository
+        private AffiliateReferralRepositoryInterface $affiliateReferralRepository,
     ) {
-        $this->affiliateReferralRepository = $affiliateReferralRepository;
     }
 
     public function assign(OrderInterface $order): void
@@ -30,7 +27,7 @@ final class AffiliateReferralAssigner implements AffiliateReferralAssignerInterf
 
         /** @var AffiliateReferralInterface|null $affiliateReferral */
         $affiliateReferral = $this->affiliateReferralRepository->findOneBy([
-            'tokenValue' => $session->get(AffiliateReferralInterface::TOKEN_PARAM_NAME)
+            'tokenValue' => $session->get(AffiliateReferralInterface::TOKEN_PARAM_NAME),
         ]);
 
         if (null === $affiliateReferral) {

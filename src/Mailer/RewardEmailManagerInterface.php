@@ -14,6 +14,6 @@ interface RewardEmailManagerInterface
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
         ChannelInterface $channel,
-        string $localeCode
+        string $localeCode,
     ): void;
 }

@@ -11,20 +11,20 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 final class RewardEmailManager implements RewardEmailManagerInterface
 {
-    private SenderInterface $emailSender;
-
     public function __construct(
-        SenderInterface $emailSender
+        private SenderInterface $emailSender,
     ) {
-        $this->emailSender = $emailSender;
     }
 
     public function sendPromotionEmail(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
         ChannelInterface $channel,
-        string $localeCode
+        string $localeCode,
     ): void {
+        /**
+         * @psalm-suppress DeprecatedMethod
+         */
         $this->emailSender->send(
             Emails::PROMOTION_REWARD,
             [$customer->getEmail()],

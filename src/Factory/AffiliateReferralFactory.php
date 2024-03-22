@@ -10,11 +10,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class AffiliateReferralFactory implements AffiliateReferralFactoryInterface
 {
-    private FactoryInterface $decoratedFactory;
-
-    public function __construct(FactoryInterface $decoratedFactory)
-    {
-        $this->decoratedFactory = $decoratedFactory;
+    public function __construct(
+        private FactoryInterface $decoratedFactory
+    ) {
     }
 
     public function createNew(): object
