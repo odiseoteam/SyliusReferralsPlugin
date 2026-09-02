@@ -2,6 +2,20 @@
 
 We are using PHPStan, Psalm, Behat, PHPSpec and PHPUnit to test this plugin.
 
+### Requirements
+
+Sylius 1.x depends on `api-platform/core` 2.x, which has open security
+advisories and no upgrade path within the 1.x line. Composer blocks such
+packages by default, so before installing:
+
+    ```bash
+    $ composer config --global policy.advisories.block false
+    $ composer install
+    ```
+
+This is scoped to your global Composer config and only affects working on
+this plugin.
+
 ### How to run the tests
 
 From the plugin root directory, run the following commands:
