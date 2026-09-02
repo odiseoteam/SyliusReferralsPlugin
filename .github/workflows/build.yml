@@ -106,6 +106,13 @@ jobs:
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.2.2"
 
             -
+                # Every Sylius 1.x release requires api-platform/core 2.x, which carries
+                # open advisories. There is no upgrade path within the 1.x line, so the
+                # test application cannot be installed without lifting the default block.
+                name: Allow advisories inherited from Sylius 1.x
+                run: composer config --no-plugins --global policy.advisories.block false
+
+            -
                 name: Restrict Symfony version
                 if: matrix.symfony != ''
                 run: |
