@@ -10,7 +10,7 @@
     "description": "Referrals plugin for Sylius. Affiliate program",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "sylius/sylius": "^1.12",
         "sylius/mailer-bundle":  "^1.8 || ^2.0@beta"
     },
