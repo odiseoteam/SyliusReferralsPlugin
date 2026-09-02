@@ -2,8 +2,8 @@ name: Build
 
 on:
     push:
-        branches-ignore:
-            - 'dependabot/**'
+        branches:
+            - master
     pull_request: ~
     release:
         types: [created]
@@ -11,6 +11,10 @@ on:
         -
             cron: "0 1 * * 6" # Run at 1am every Saturday
     workflow_dispatch: ~
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
     tests:
@@ -67,7 +71,11 @@ jobs:
 
             -
                 name: Install certificates
-                run: symfony server:ca:install
+                run: |
+                    sudo apt-get install -y libnss3-tools
+                    mkdir -p "$HOME/.pki/nssdb"
+                    certutil -d "sql:$HOME/.pki/nssdb" -N --empty-password
+                    symfony server:ca:install
 
             -
                 name: Run Chrome Headless
